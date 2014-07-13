@@ -1,7 +1,7 @@
 @RestResource(urlMapping='/jira')
 global class WebHookTest {
     
-    @HttpGet
+    @HttpPost
     global static void handlePost(){
         Restrequest req = RestContext.request;
         Restresponse res = RestContext.response;
