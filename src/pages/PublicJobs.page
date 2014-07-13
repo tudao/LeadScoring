@@ -1,0 +1,60 @@
+<apex:page showheader="false" action="{!initList}" controller="PublicJobSearchController" standardStylesheets="true"> 
+<!-- The site template provides the layout and the style for the site -->
+ <apex:form > 
+   <!-- Search by Department, Location and Keyword -->
+   <apex:pageBlock title="Search Job Postings">
+     <apex:pageBlockSection columns="1">
+       <apex:pageBlockSectionItem >
+         <apex:outputText value="Department"/>
+         <apex:selectList value="{!viewDepartmentName}" id="departmentViews" size="1" required="true">
+           <apex:selectOptions value="{!DepartmentViewNames}"/>
+         </apex:selectList>
+       </apex:pageBlockSectionItem>
+       <apex:pageBlockSectionItem >
+         <apex:outputText value="Location"/>
+         <apex:selectList value="{!viewLocationName}" id="locationViews" size="1" required="true">
+           <apex:selectOptions value="{!LocationViewNames}"/>
+         </apex:selectList>
+       </apex:pageBlockSectionItem>
+       <apex:pageBlockSectionItem >
+         <apex:outputText value="Keyword"/>
+         <apex:inputText value="{!searchPosition}"/>
+       </apex:pageBlockSectionItem>
+       <apex:pageBlockSectionItem >
+         <apex:outputText value=""/>
+         <apex:commandButton value="Search" action="{!PopulateQuery}" reRender="JobList" />
+       </apex:pageBlockSectionItem>
+     </apex:pageBlockSection>
+    </apex:pageBlock>   
+  </apex:form> 
+  <!-- Search results -->
+  <apex:pageBlock title="Search Results">
+    <apex:pageBlockTable id="JobList" value="{!Position}" var="Position__c"  rendered="{!NOT(ISNULL(Position))}">
+      <apex:column >
+        <apex:facet name="header">
+         <apex:outputText value="Title"/>
+       </apex:facet>
+       <!-- Position name field is linked to the job details page -->
+       <apex:outputLink value="{!$Site.Prefix}/PublicJobDetails?id={!Position__c.id}" id="theLink">{!Position__c.name}</apex:outputLink>
+       </apex:column>
+     <apex:column >
+       <apex:facet name="header">
+         <apex:outputText value="Department"/>
+       </apex:facet>
+       <apex:outputText value="{!Position__c.Department__c}"/>
+     </apex:column>
+     <apex:column >
+       <apex:facet name="header">
+         <apex:outputText value="Location"/>
+       </apex:facet>
+       <apex:outputText value="{!Position__c.Location__c}"/>
+     </apex:column>
+     <apex:column >
+       <apex:facet name="header">
+         <apex:outputText value="Job Description"/>
+       </apex:facet>
+       <apex:outputText value="{!Position__c.Job_Description__c}"/>
+     </apex:column>
+   </apex:pageBlockTable> 
+  </apex:pageBlock>    
+</apex:page>

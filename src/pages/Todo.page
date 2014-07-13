@@ -1,0 +1,98 @@
+<apex:page controller="TodoController" showHeader="false">
+	
+	<head>
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"/>
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"/>
+	<apex:includeScript value="{!URLFOR($Resource.tablesorter, 'jquery.tablesorter.min.js')}"/>
+	<apex:stylesheet value="{!URLFOR($Resource.tablesorter, 'themes/blue/style.css')}"/>
+	
+	<script>
+		$(document).ready(function(){
+		  //$("#example").tablesorter({headers: {0 : {sorter : false}}});
+		});
+		
+		function confirmDelete(id){
+			var retVal = confirm("Are you sure you want to delete this item ?");
+			if( retVal == true ){
+			   del(id);
+			}
+		}
+		
+		function hideBtn(){
+			$('input[type=button]').hide();
+		}
+	</script>
+	
+	<style>
+		.headerStyle 
+	    {
+		    background: none repeat scroll 0 0 #C2E4FE;
+		    margin-bottom: 15px;
+		    font-weight: bold;
+		    height:30px;
+		    text-align : center;
+		    padding-top:15px;
+		    font-family: 'Verdana','Geneva',sans-serif;
+		    font-size : 150%;
+		}
+		
+		.handcursor {cursor: hand; cursor: pointer;}
+		.customlink{color : blue !important; text-decoration:underline; float:left}
+		.customlink:hover{color:#00A3F5 !important;}
+		#example tr.dataRow td:hover{background: url("/img/func_icons/util/pencil12.gif") no-repeat scroll right 2px #D5EAF0;}
+		#example tr.dataRow td.link{background-color:#FFFFFF !important;background-image:none !important;}
+	</style>
+  </head>
+	<body>
+	<div class="headerStyle">
+		<center><span style="color:#0B6138;">Todo List</span></center>
+	</div>
+	<c:Overlay style="processing" />
+	<apex:form >
+	<apex:pageBlock id="pb" mode="inlineEdit">
+			
+		<apex:actionStatus id="overlayStatus" onStart="showOverlay();" onstop="hideOverlay();"/>
+		<apex:actionFunction name="add" action="{!addNew}" rerender="op" status="overlayStatus"/>
+		<apex:actionFunction name="del" action="{!deleteItem}" rerender="op" status="overlayStatus">
+			<apex:param name="deletedItem" value="" assignTo="{!deletedItem}"/>
+		</apex:actionFunction>
+		
+		<apex:pageBlock id="op">
+			<apex:pageBlockButtons location="top">
+				<apex:commandButton id="save" value="Save" action="{!save}" reRender="pb" onclick="showOverlay();" oncomplete="hideOverlay();"/>
+				<apex:commandButton id="cancel" value="Reset" reRender="pb" action="{!cancel}"  onclick="showOverlay();" oncomplete="hideOverlay();"/>
+			</apex:pageBlockButtons>
+		
+			<apex:pageMessage summary="Double click a table cell to edit." severity="info" strength="1" />
+		
+			<table id="example" class="tablesorter" border="0" cellpadding="0" cellspacing="1" width="500%">
+				<thead class="rich-table-thead">
+					<tr class="headerRow">
+						<th width="5%"></th>
+						<th width="20%">Title</th>
+						<th width="30%">Notes</th>
+						<th width="15%">Status</th>
+						<th width="15%">Priority</th>
+						<th width="15%">Due Date</th>
+					</tr>
+				</thead>
+				<tbody>
+					<apex:repeat value="{!todoList}" var="todo">
+						<tr class="dataRow">
+							<td class="link"><div class="handcursor customlink" onclick="confirmDelete('{!todo.Id}');">Delete</div></td>
+							<td><apex:outputField value="{!todo.Title__c}"/></td>
+							<td><apex:outputField value="{!todo.Notes__c}"/></td>
+							<td><apex:outputField value="{!todo.Status__c}"/></td>
+							<td><apex:outputField value="{!todo.Priority__c}"/></td>
+							<td><apex:outputField value="{!todo.Due_Date__c}"/></td>
+						</tr>
+					</apex:repeat>
+				</tbody>
+			</table>
+			<div class="handcursor customlink" onclick="add();">Add new</div>
+			<script>$("#example").tablesorter({headers: {0 : {sorter : false}}});</script>
+		</apex:pageBlock>
+	</apex:pageBlock>
+	</apex:form>
+	</body>
+</apex:page>

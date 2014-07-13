@@ -1,0 +1,134 @@
+<apex:page standardcontroller="Account" renderAs="pdf" contentType="application/pdf">
+<head>
+
+<style>
+
+@page {
+    margin : 200pt .5in .5in .5in;
+    @top-center {
+        content : element(header);
+     }
+    @bottom-left {
+        content : "My Footer on Left Side";
+        font-size : 10 px;
+        color : #808080;
+    }
+    @bottom-center {
+        content : "My Footer in center" ;
+        font-size : 10 px;
+        color : #808080;
+    }
+}
+
+
+
+div.header {
+    position : running(header) ;
+}
+
+
+</style>
+
+</head>
+<div class="header" style="border:1px solid; border-color:green;">
+    Hello {!account.Name}
+</div>
+<body>
+
+<table>
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+<tr>
+<td><h1>Hello worle</h1></td>
+</tr>
+</table>
+
+
+
+</body>
+</apex:page>

@@ -1,0 +1,25 @@
+<!--
+name        : DemoSFDragDropList
+author      : Aslam Bari (www.aslambari.com)
+date        : 14th May, 2011
+description : Demo page to show drag drop in action
+-->
+
+<apex:page controller="DemoSFDragDropList" showheader="false">
+	<apex:composition template="{!$Site.Template}">
+		<apex:define name="body"> 
+			 <apex:sectionHeader title="http://www.aslambari.com" subtitle="SF Drag Drop MultiSelect List Demo"/>
+			 <c:SFDragDropList list1="India;United States;France;Germany;Japan;VietName;Australia;Thailan;Singapore;Philipin" outputFieldId="list_2_serialised"/>
+			 <div style="clear:both">
+			 <apex:form >
+			     <input type="hidden" id="list_2_serialised" name="list_2_serialised" value="{!list2FinalItems}"/>
+			     <apex:commandButton action="{!showSelectedItems}" reRender="selectedItems" value="Show Selected Value" status="status"/>
+			 </apex:form>
+			 <apex:actionStatus id="status" startText="Fetching..."></apex:actionStatus>
+			 <apex:outputPanel id="selectedItems">
+			     <i>{!list2FinalItems}</i>
+			 </apex:outputPanel>
+			 </div>
+	 	</apex:define>
+	 </apex:composition>
+</apex:page>

@@ -1,0 +1,23 @@
+<apex:component >
+<div id="header-wrapper">
+<div id="logo">
+<h1><a href="http://salesforceexperts.blogspot.com">Blog Application</a></h1>
+</div>
+<hr />
+<!-- end #logo -->
+<div id="header">
+<div id="menu">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="/apex/SFUnearthed_Articles">Articles</a></li>
+        <li><a href="http://salesforceexperts.blogspot.com">Blog</a></li>
+        <li><a href="/apex/SFUnearthed_Resources">Resources</a></li>
+        <!--<li><a href="#">Time to Relax</a></li>-->
+    </ul>
+</div>
+<!-- end #menu -->
+</div>
+<!-- end #header -->
+</div>
+<!-- end #header-wrapper -->
+</apex:component>

@@ -1,0 +1,16 @@
+<apex:component controller="cms.ContentLayoutController" extensions="cms.Listable2">
+
+<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+<div class="panel-content">
+    <apex:outputLink value="{!IF(TargetLinkObj.targetPage != null, URLFOR(TargetLinkObj.targetPage), '')}" target="{!TargetLinkObj.target}" onclick="{!TargetLinkObj.javascript}"><apex:outputText value="{!ListSummary}" /></apex:outputLink>
+    
+    <apex:outputText escape="false" rendered="{!!ISBLANK(morelink)}">
+        <apex:outputLink value="{!IF(TargetLinkObj.targetPage != null, URLFOR(TargetLinkObj.targetPage), '')}" target="{!TargetLinkObj.target}" onclick="{!TargetLinkObj.javascript}" styleClass="more-link" ><apex:outputText value="{!MoreLink}" /></apex:outputLink>
+    </apex:outputText>
+</div>
+
+
+</apex:component>

@@ -1,0 +1,30 @@
+<apex:page contentType="text/xml">
+
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+      http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+    
+<!-- Replace the following URL with the site URL that you want
+     to be mapped and accessible to Web crawlers. -->
+    
+<url>
+  <loc>http://mycompany.force.com/mypath</loc>
+</url>
+<!-- Replace the following URLs with your site's actual URLs -->
+    
+<url>
+  <loc>http://mycompany.force.com/mypath/pagename</loc>
+</url>
+<url>
+  <loc>
+http://mycompany.force.com/mypath/page_detail?id=701300000006CnSAAU
+  </loc>
+</url>
+<url>
+  <loc>http://mycompany.force.com/mypath/page_index</loc>
+</url>
+</urlset>
+</apex:page>

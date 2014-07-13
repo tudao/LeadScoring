@@ -1,0 +1,8 @@
+<apex:page controller="showAttachmentController" showheader="false" sidebar="false">
+ 
+    <apex:form >
+      <apex:image url="{!imageURL}"  width="200" height="200">
+    </apex:image>
+    </apex:form>
+ 
+</apex:page>

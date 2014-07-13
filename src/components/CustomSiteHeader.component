@@ -1,0 +1,3 @@
+<apex:component id="headerComponent">
+    <apex:image url="{!$Resource.SitesDemo}" style="align: left;" alt="Force.com Sites Demo" width="233" height="55" title="Force.com Sites Demo"/>
+</apex:component>

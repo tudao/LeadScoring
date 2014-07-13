@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Product_Stock_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF((Opportunity.Lock__c), &quot;Qualified&quot;,
+	IF(( ISNULL( PricebookEntry.Product2.Quantity_On_Hand__c)),IMAGE(&quot;/resource/readymade_inv__rio_readymade_inventory_green_status&quot;, &quot;green_status&quot;,10,21)+ &quot; Non-inventory Item&quot;,
+	IF((Quantity_On_Hand__c - Quantity)  &gt; PricebookEntry.Product2.Product_Quantity_Threshold__c ,  IMAGE(&quot;/resource/readymade_inv__rio_readymade_inventory_green_status&quot;, &quot;green_status&quot;,10,21)+&quot; Quantity on Hand (&quot;+ TEXT(PricebookEntry.Product2.Quantity_On_Hand__c) +&quot;) :- Sufficient Stock&quot;  ,
+		IF((Quantity_On_Hand__c - Quantity)   &lt; 0, IMAGE(&quot;/resource/readymade_inv__rio_readymade_inventory_red_status&quot;, &quot;red_status&quot;,10,21)+&quot; Quantity on Hand (&quot;+ TEXT(PricebookEntry.Product2.Quantity_On_Hand__c) +&quot;) :- Insufficient stock  to satisfy this order!&quot; ,
+  IMAGE(&quot;/resource/readymade_inv__rio_readymade_inventory_amber_status&quot;,&quot;amber_status&quot;,10,21)+&quot;  Quantity on Hand (&quot;+ TEXT(PricebookEntry.Product2.Quantity_On_Hand__c) +&quot;) :- This order will take stock below the defined threshold&quot;  ) 
+)
+)
+)</formula>
+        <label>Product Stock Status</label>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity_On_Hand__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>PricebookEntry.Product2.Quantity_On_Hand__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Quantity On Hand</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

@@ -1,0 +1,22 @@
+<apex:component controller="cms.Breadcrumb" >
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+	
+	<apex:attribute name="page_content_layout_instance" type="cms__Page_Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!page_content_layout_instance}" />
+	<apex:attribute name="page_content_layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!page_content_layout_instance_properties}" />
+
+	<apex:attribute name="content_children" type="cms.ContentTreeNode" description="The panel unique identifier"  assignTo="{!children_nodes}" />
+	<apex:attribute name="content_children_attributes" type="cms.AttributeWrapper" description="The panel unique identifier" assignTo="{!children_nodes_attributes}" />
+
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!pm}" />
+	<apex:attribute name="preview_parameters" type="String" description="The page mode that the site is being rendered in" assignTo="{!pp}" />
+	<apex:attribute name="filter_by_profile" type="Boolean" description="The page mode that the site is being rendered in" assignTo="{!fbp}" />
+			
+	<apex:outputText escape="false" value="{!HTML}" />
+
+</apex:component>

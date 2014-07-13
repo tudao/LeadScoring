@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Product_Quantity_Threshold__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <inlineHelpText>Define a quantity threshold for this product for stock alert purposes</inlineHelpText>
+        <label>Product Quantity Threshold</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quantity_On_Hand__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Quantity On Hand</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <validationRules>
+        <fullName>StockThresholdIsBlank</fullName>
+        <active>false</active>
+        <errorConditionFormula>IF( NOT( ISNULL( Quantity_On_Hand__c ) ) , ISNULL( Product_Quantity_Threshold__c )  , NOT( ISNULL( Product_Quantity_Threshold__c ) ) )</errorConditionFormula>
+        <errorDisplayField>Product_Quantity_Threshold__c</errorDisplayField>
+        <errorMessage>Define a product quantity threshold or apply &apos;0&apos; if not applicable for this product</errorMessage>
+    </validationRules>
+</CustomObject>

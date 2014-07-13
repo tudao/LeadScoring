@@ -1,0 +1,12 @@
+<apex:page standardController="Opportunity" extensions="Opp_Ext" >
+    <apex:form >
+        <apex:commandButton value="Do Stuff" action="{!doStuffAndRedirect}" rerender="redirectPanel" />
+        <apex:outputPanel id="redirectPanel" >
+            <apex:outputText rendered="{!shouldRedirect}">
+                <script type="text/javascript">
+                    window.top.location.href = '{!redirectUrl}';
+                </script>
+            </apex:outputText>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

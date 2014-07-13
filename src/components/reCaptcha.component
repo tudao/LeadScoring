@@ -1,0 +1,49 @@
+<apex:component controller="reCaptchaComponent">
+
+<apex:attribute name="url" type="string" default="" description="the name of destination page" assignTo="{!url}"/>
+<apex:attribute name="theme" type="string" default="red" description="captcha theme"/>
+
+<script src="http://api.recaptcha.net/js/recaptcha_ajax.js" type="text/javascript"/>
+<script>
+function showRecaptcha(element) {
+  Recaptcha.create("{!publicKey}", element, {
+        theme: '{!theme}',
+        tabindex: 0,
+        callback: Recaptcha.focus_response_field
+  });
+}
+</script>
+
+<!--  display the challenge form in this output panel -->
+	<apex:form >
+		<apex:actionFunction name="verify" action="{!verify}" rerender="captcha" status="check"/>
+		<apex:panelGrid columns="1" width="350px">
+			<apex:pageBlock >
+				<apex:outputPanel id="captcha">
+					<apex:pageMessages />
+				</apex:outputPanel>
+				<apex:inputhidden value="{!challenge}" id="challenge" />
+				<apex:inputhidden value="{!response}" id="response" />
+				<script type="text/javascript">
+				function captureResponse(ele) { 
+					document.getElementById('{!$Component.challenge}').value = document.getElementById('recaptcha_challenge_field').value;
+					document.getElementById('{!$Component.response}').value = document.getElementById('recaptcha_response_field').value;
+				}
+				</script>
+				<div id="dynamic_recaptcha_1"></div>
+				<div>
+					<apex:commandButton value="Submit" onclick="javascript:captureResponse(this);verify();return false;" />
+					<apex:actionStatus id="check" onstop="Recaptcha.reload();">
+       				 	<apex:facet name="start">
+				        	<img src="/img/loading.gif" alt="Checking graphic" /> Checking...
+					    </apex:facet>
+	       			</apex:actionStatus>
+				</div>
+			</apex:pageBlock>
+		</apex:panelGrid>
+	</apex:form>
+	
+	<!--  display the image using the reCAPTCHA AJAX API -->
+	<script type="text/javascript">showRecaptcha('dynamic_recaptcha_1');</script>
+	
+</apex:component>

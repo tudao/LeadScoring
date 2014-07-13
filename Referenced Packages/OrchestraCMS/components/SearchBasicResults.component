@@ -1,0 +1,29 @@
+<apex:component controller="cms.SearchBasicResultsController">
+
+    <apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+    <apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+    <apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+    <apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+    <apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+    <apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!site_name}" />
+    <apex:attribute name="page_mode" type="String" description="The mode the component is being rendered in" assignTo="{!page_mode}" />
+	<apex:attribute name="page_soql_timeline" type="String" description="the timeline to generate the results in" assignTo="{!page_soql_timeline}" />
+
+    <apex:outputPanel layout="block">
+
+        Searched: {!searchParameters}<br /> 
+        Results: {!resultsSize}<br /><br />
+        
+        <apex:repeat value="{!results}" var="result">
+        
+            <apex:outputPanel layout="block">
+                <a href="{!URLFOR(result.url)}">{!result.label}</a><apex:outputText value="{!IF(result.description != null, '<br />' + result.description, '')}" escape="false" />
+            </apex:outputPanel><br />
+        
+        </apex:repeat>
+
+    </apex:outputPanel>
+
+</apex:component>

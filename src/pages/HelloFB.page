@@ -1,0 +1,19 @@
+<apex:page >
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:fb="http://ogp.me/ns/fb#">
+<body>
+<div id="fb-root"></div>
+<script src="http://connect.facebook.net/en_US/all.js" charset="utf-8">
+</script>
+<script>
+FB.init({appId: '417257538293614', status: true, cookie: true, xfbml:true});
+</script>
+<h1>Inspirations</h1>
+<div id="quote">
+<span id="facebook_stuff">
+</span>
+"When I examine myself and my methods of thought,
+I come to the conclusion that the gift of fantasy has meant more to me
+than any talent for abstract, positive thinking." - Albert Einstein</div>
+</body>
+</html>
+</apex:page>

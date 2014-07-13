@@ -1,0 +1,10 @@
+<apex:page controller="cms.GenerateContent" standardStylesheets="false" showHeader="false" sidebar="false" id="g">
+	<html>
+	<head></head>
+	<body>	
+	{:Start:}
+	<c:Breadcrumb content="{!content}" properties="{!properties}" layout_instance="{!cli}" layout_instance_properties="{!cli_properties}" page_content_layout_instance="{!pcli}" page_content_layout_instance_properties="{!pcli_properties}" page_mode="{!page_mode}" site_name="{!site_name}" filter_by_profile="{!filter_by_profile}" content_children="{!content_children}" content_children_attributes="{!content_children_attributes}" />
+	{:Stop:}
+	</body>
+	</html>
+</apex:page>

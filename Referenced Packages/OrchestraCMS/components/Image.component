@@ -1,0 +1,20 @@
+<apex:component controller="cms.Image">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!pm}" />	
+	
+	<apex:outputLink value="{!IF(TargetPageObj.targetPage != null, URLFOR(TargetPageObj.targetPage), '')}" target="{!TargetPageObj.target}" onclick="{!TargetPageObj.javascript}" rendered="{!!ISBLANK(ImageLink)}" >
+		<apex:image alt="{!AltText}" title="{!TitleText}" value="{!Image}" />
+	</apex:outputLink>
+
+	<apex:image alt="{!AltText}" title="{!TitleText}" value="{!Image}" rendered="{!ISBLANK(ImageLink)}" />
+
+
+</apex:component>

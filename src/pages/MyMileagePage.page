@@ -1,0 +1,5 @@
+<apex:page standardController="Mileage__c" extensions="MileageExtension">
+<h1>{!$User.FirstName}'s Mileage Page</h1>
+<apex:detail > </apex:detail>
+<apex:detail subject="{!Mileage__c.Contact__c}" relatedList="false"></apex:detail>
+</apex:page>

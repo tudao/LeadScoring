@@ -1,0 +1,109 @@
+<apex:page showHeader="false" standardcontroller="Blog_Post__c" extensions="blogController" standardStylesheets="fasle">
+<head>
+
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://www.blogger.com/css/blogger.css" />
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.6.0/build/assets/skins/sam/skin.css"/>
+<apex:includeScript value="http://yui.yahooapis.com/2.6.0/build/yahoo-dom-event/yahoo-dom-event.js" />
+<apex:includeScript value="http://yui.yahooapis.com/2.6.0/build/container/container-min.js" />
+<apex:includeScript value="http://yui.yahooapis.com/2.6.0/build/animation/animation-min.js" />
+
+
+<style type="text/css">
+	html body #header { margin-top:0px;font-family:"trebuchet MS", helvetica; }
+	a.title, a.title:hover {color:#f60;text-decoration:none;}
+	#header a, #header a:hover {font-size: 26px; color: #fff; text-decoration:none;}
+	#header .right {float: right;font-size: 18px; color:#258;}
+	.sub{font-size:11px;text-align:right;}
+	input.groovybutton 
+	{ 	font-size:12px;
+		width:85px; height:30px;
+		border-style:ridge;
+		border-color:#643200; 
+	}
+	
+	div.clear {
+	    clear:both;
+	}
+</style>
+
+<script>
+	YAHOO.namespace("force.com");
+	// Function called when we want to show the dialog
+    YAHOO.force.com.showMe = function() {
+	    document.getElementById("captcha").style.display = "block";
+	    YAHOO.force.com.myDialog.show();
+    }
+    // Function called when we want to hide the dialog
+    YAHOO.force.com.hideMe = function() {
+        YAHOO.force.com.myDialog.hide();
+    }
+    // Function called when the DOM is ready to create the dialog,
+    // render the dialog into the document body, add our dialog skin
+    // css to the body tag, and wire up the buttons on our dialog   
+    YAHOO.force.com.init = function() {
+        document.body.className = document.body.className + " yui-skin-sam";
+        YAHOO.force.com.myDialog = new YAHOO.widget.Panel(
+            "captcha",  // The id of our dialog container
+            {
+                    width           :   300,    // You can play with this until it's right
+                    visible         :   false,  // Should be invisible when rendered
+                    draggable       :   true,   // Make the dialog draggable
+                    close           :   true,  // Don't include a close title button
+                    modal           :   true,   // Make it modal
+                    fixedCenter     :   true,   // Keep centered if window is scrolled
+                    zindex          :   40,     // Make sure it's on top of everything
+                    // This line adds the appear/vanish fade effect
+                    effect          :   {
+                                          effect:YAHOO.widget.ContainerEffect.FADE,
+                                          duration:0.35
+                                        }
+            }
+         );
+         console.log(YAHOO.force.com.myDialog);
+        // Render the dialog to the document.body level of the DOM
+        YAHOO.force.com.myDialog.render(document.body);
+    }
+    
+    // Add the init method to the window.load event
+    YAHOO.util.Event.addListener(window, "load", YAHOO.force.com.init);
+    
+</script>
+
+</head>
+<apex:outputLink value="{!$Site.Prefix}"><apex:image url="{!$Resource.home}" width="100" height="30"/></apex:outputLink>
+<div id="captcha" style="display: none" align="center">
+	<c:reCaptcha url="/blogedit"/>
+</div>
+<div id="body">
+	<div id="main-wrap" >
+		<div id="main" style="margin-top:5px" >
+			<div id="m2">
+				<div id="m3">
+				
+					<apex:repeat value="{!Posts}" var="post">
+					
+						<h2 id="title">
+							<a class="title" href="{!$Site.Prefix}/blogedit?id={!post.Id}" target="_top">{!post.Name}</a>
+						</h2>
+						<br />
+						
+						<apex:outputPanel >
+						    <apex:outputText value="{!post.Post__c}" escape="false"></apex:outputText>
+						</apex:outputPanel>
+						
+						<p class="sub">Posted by {!post.CreatedBy.Name} on {!post.CreatedDate}</p>
+						
+					</apex:repeat>
+					
+					<center>
+						<apex:form >
+							<apex:commandButton styleclass="groovybutton" value="New Post" onclick="YAHOO.force.com.showMe();return false;"/>
+						</apex:form>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</apex:page>

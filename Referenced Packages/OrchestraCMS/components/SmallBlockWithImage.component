@@ -1,0 +1,40 @@
+<apex:component id="c43" controller="cms.SmallBlockWithImage">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+	<div class="small-block">
+		<apex:outputText escape="false" rendered="{!!ISBLANK(ImageId)}" >
+			<div class="small-block-image">
+				<apex:image value="{!ImageId}" />
+			</div>
+		</apex:outputText>
+		
+		<div class="small-block-content">
+			<apex:outputText escape="false" rendered="{!!ISBLANK(ContentTitle)}" >
+				<div class="small-block-title">	
+					<apex:outputLink rendered="{!TargetPageLinkObj.targetPage!=null}" value="{!URLFOR(TargetPageLinkObj.targetPage)}" target="{!TargetPageLinkObj.target}" onclick="{!TargetPageLinkObj.javascript}"><apex:outputText value="{!ContentTitle}" escape="false" /></apex:outputLink>
+					<apex:outputText rendered="{!TargetPageLinkObj.targetPage ==null}" value="{!ContentTitle}" escape="false" />
+				</div>
+			</apex:outputText>
+			
+			<div class="small-block-text">
+				<apex:outputLink rendered="{!TargetPageLinkObj.targetPage!=null}" value="{!URLFOR(TargetPageLinkObj.targetPage)}" target="{!TargetPageLinkObj.target}" onclick="{!TargetPageLinkObj.javascript}"><apex:outputText value="{!ContentSummary}" escape="false" /></apex:outputLink>
+				<apex:outputText rendered="{!TargetPageLinkObj.targetPage ==null}" value="{!ContentSummary}" escape="false" />
+			</div>
+			<apex:outputText escape="false" rendered="{!!ISBLANK(MoreLink)}" >
+				<div class="small-block-more">	
+					<apex:outputLink value="{!IF(TargetPageLinkObj.targetPage != null, URLFOR(TargetPageLinkObj.targetPage), '')}" target="{!TargetPageLinkObj.target}" onclick="{!TargetPageLinkObj.javascript}" styleClass="more-link"><apex:outputText value="{!MoreLink}" escape="false" /></apex:outputLink>
+				</div>
+			</apex:outputText>
+		</div>
+		
+		<div class="clear"></div>
+	</div>
+
+
+</apex:component>

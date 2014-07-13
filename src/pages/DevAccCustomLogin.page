@@ -1,0 +1,96 @@
+<apex:page showHeader="false" controller="DevAccCustomLoginController"
+    standardStylesheets="false" sidebar="false">
+    
+    <apex:includeScript value="http://jqueryjs.googlecode.com/files/jquery-1.3.2.min.js" />
+    
+    <head>
+        <title>Customer Portal</title>
+
+        <script type='text/javascript'>
+        
+        $(document).ready(function(){
+        	$('input[id$=username]').val('tdao@92demo.com');
+        	$('input[id$=password]').val('tusf###789');
+        });
+        
+        function noenter(ev)  {
+            if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+                javascriptLogin();
+                return false;
+             } else {
+                  return true;
+             }
+         }
+        </script>
+        <style type="text/css">
+             fieldset.login {
+                background: none repeat scroll 0 0 white;
+                border: 1px solid #AAAAAA;
+                border-radius: 5px 5px 5px 5px;
+                font-family: "Century Gothic","Lucida Grande",Arial,sans-serif;
+                margin: 0 0 25px;
+                padding: 10px;
+            }
+
+            fieldset.login label {
+                clear: both;
+                color: #333333;
+                display: block;
+                font-size: 12px;
+                font-weight: bold;
+                padding-top: 10px;
+            }
+
+            fieldset.login input.text {
+                border: 1px solid #AAAAAA;
+                color: #5E5E5E;
+                float: auto;
+                padding: 5px;
+                width: 320px;
+            }
+
+            .clear {
+                clear: both;
+            }
+
+            .content {
+                margin: 0 auto;
+                width: 340px;
+            }
+        </style>
+    </head>
+    <body>
+
+        <div class="content">
+
+            <div class="login">
+                <apex:form id="loginForm" forceSSL="true">
+                    <apex:actionFunction name="javascriptLogin" action="{!login}" />
+
+                    <fieldset class="login">
+                        <center><b>Login to Customer Portal</b></center>
+                        <apex:pageMessages id="error" />
+
+                        <apex:outputLabel styleClass="label"
+                            value="{!$Label.site.username}" for="username" />
+                        <apex:inputText styleClass="text" id="username"
+                            value="{!username}" />
+                        <apex:outputLabel styleClass="label"
+                            value="{!$Label.site.password}" for="password" />
+                        <apex:inputSecret styleClass="text" id="password"
+                            value="{!password}" onkeypress="return noenter(event);" />
+
+                        <div class="clear"></div>
+                        <span class="form-link"> </span>
+                        <div class="clear"></div>
+                        <p>
+                           <center><apex:commandButton value="Login" styleClass="button" action="{!login}" id="submitbutton" /></center>
+                        </p>
+                    </fieldset>
+                    <p></p>
+
+                </apex:form>
+            </div>
+        </div>
+    </body>
+</apex:page>

@@ -1,0 +1,83 @@
+<apex:page showheader="false" controller="demoController">
+
+<style>
+#menu8 {
+	width: 218px;
+	margin-top: 10px;
+}
+	
+#menu8 li a {
+	text-decoration: none;
+	height: 32px;
+  	voice-family: "\"}\""; 
+  	voice-family: inherit;
+  	height: 24px;
+}
+	
+#menu8 li a:link, #menu8 li a:visited {
+	color: #777;
+	display: block;
+	background: url({!$Resource.menu8});
+	padding: 8px 0 0 20px;
+}
+	
+#menu8 li a:hover {
+	color: #257EB7;
+	background: url({!$Resource.menu8}) 0 -32px;
+	padding: 8px 0 0 25px;
+}
+	
+#menu8 li a:active {
+	color: #fff;
+	background: url({!$Resource.menu8}) 0 -64px;
+	padding: 8px 0 0 25px;
+}
+
+#menu8 ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+</style>
+
+<apex:composition template="{!$Site.Template}">
+	<apex:define name="body"> 
+	<apex:form >
+	<apex:actionFunction name="refreshLifeQuotes" action="{!refreshLifeQuotes}" rerender="quotes"/>
+	
+	<table width="100%">
+		<tr>
+			<td width="20%">
+				<div id="menu8">
+				  <ul>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/PublicJobs">Recruiting Website</apex:outputLink></li>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/blog">Simple Blog</apex:outputLink></li>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/customLogin">Customer Portal</apex:outputLink></li>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/imageGallerySite">Image Gallery</apex:outputLink></li>
+				  	<!-- 
+				  	<li><apex:outputLink value="{!$Site.Prefix}/DemoSFDragDropList">Drag-Drop List</apex:outputLink></li>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/orgchart">Google Visualization</apex:outputLink></li>
+				  	<li><apex:outputLink value="{!$Site.Prefix}/overlay">Ajax Loader</apex:outputLink></li>
+				  	-->
+				  	<li><apex:outputLink value="{!$Site.Prefix}/reCaptcha">reCaptcha</apex:outputLink></li>
+				  	<!-- 
+				  	<li><apex:outputLink onclick="refreshLifeQuotes();return false;">Life Quotes</apex:outputLink></li>
+				  	 -->
+				  </ul>
+				</div>
+			</td>
+			<td width="80%" style="text-align:center;">
+				<apex:outputPanel id="quotes">
+					<apex:outputPanel rendered="{!renderLifeQuotes}">
+					 	<apex:image url="{!URLFOR($Resource.lifequotes, quoteFile)}" width="400" height="300"/>
+					 </apex:outputPanel>
+				</apex:outputPanel>
+			</td>
+		</tr>
+	</table>
+	</apex:form>
+	</apex:define>
+</apex:composition>
+
+</apex:page>

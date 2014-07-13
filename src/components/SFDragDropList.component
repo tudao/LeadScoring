@@ -1,0 +1,41 @@
+<!--
+name        : SFDragDropList
+author      : Aslam Bari (www.aslambari.com)
+date        : 14th May, 2011
+description : Drag Drop Component contains items to show and onchange method useful
+-->
+<apex:component controller="SFDragDropListController">
+<apex:attribute name="list1" description="values for list one" type="string" assignTo="{!list1}" required="true"/>
+<apex:attribute name="list2" description="values for list two" type="string" assignTo="{!list2}"/>
+<apex:attribute name="outputFieldId" description="values which is stored in target list, fill in given textbox" type="string" assignTo="{!outputFieldId}" required="true"/>
+<c:BaseDragDropComponent />
+<script>
+$(function(){
+    mychange = function ( $list ){
+        $( '#{!outputFieldId}').val( $.dds.serialize( 'list_2' ) );
+    }
+    $('ul').drag_drop_selectable({
+        onListChange:mychange
+    });
+    $( '#{!outputFieldId}').val( $.dds.serialize( 'list_2' ) );
+});
+</script>
+
+<div class='panel'>
+<h2>Source List</h2>
+<ul id="list_1">
+    <apex:repeat value="{!list1Items}" var="item">
+        <li id="{!item}">{!item}</li>
+    </apex:repeat>
+</ul>
+</div>
+
+<div class='panel'>
+<h2>Target List</h2>
+<ul id="list_2">
+    <apex:repeat value="{!list2Items}" var="item">
+        <li id="{!item}">{!item}</li>
+    </apex:repeat>
+</ul>
+</div>
+</apex:component>

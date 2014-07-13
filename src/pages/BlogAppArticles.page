@@ -1,0 +1,60 @@
+<apex:page standardStylesheets="fasle" showheader="false" controller="BlogAppController" title="Blog Application" action="{!pageload}">
+<html>
+<head>
+<title>Blog Application</title>
+<apex:include pageName="BlogAppCSS"/>
+</head>
+<body>
+
+<c:BlogAppHeader ></c:BlogAppHeader>
+
+<apex:form >
+
+<div id="page">
+<div id="content">
+<apex:outputpanel id="articlespace">
+<div id="posts">
+ <apex:repeat value="{!articles}" var="article">
+ <div class="post">
+     <h2 class="title">{!article.Name}</h2>
+     <p class="date">{!article.Category__c}</p>
+     <p class="meta"><em>Posted by <a href="#">{!article.Author__c}</a> {!article.CreatedDate}</em></p>
+     <div class="entry">
+         <apex:outputtext escape="false" value="{!article.Article_Description__c}"/>
+     </div>
+ </div>
+ </apex:repeat>
+ </div>
+</apex:outputpanel>
+</div>
+<!-- end #content -->
+<div id="sidebar">
+	<div id="categories" class="boxed">
+     <ul>
+         <div style="position:relative;left:40px;">
+         <apex:commandlink action="{!createnewarticle}"> <apex:image url="{!$Resource.CreateNewArticle}"/> </apex:commandlink>
+         </div>
+         <br/>
+         <li>
+         <h2>Categories</h2>
+         <ul>
+             <li><apex:commandlink value="Visualforce" action="{!Category}"><apex:actionsupport event="onclick" rerender="articlespace"/><apex:param name="category" value="visualforce"/></apex:commandlink></li>
+             <li><apex:commandlink value="Apex Classes" action="{!Category}"><apex:actionsupport event="onclick" rerender="articlespace"/><apex:param name="category" value="Apex Classes"/></apex:commandlink> </li>
+             <li><apex:commandlink value="Apex Triggers" action="{!Category}"><apex:actionsupport event="onclick" rerender="articlespace"/><apex:param name="category" value="Apex Triggers"/></apex:commandlink> </li>
+             <li><apex:commandlink value="Set-up and Config" action="{!Category}"><apex:actionsupport event="onclick" rerender="articlespace"/><apex:param name="category" value="Set-up and Config"/></apex:commandlink> </li>
+             <li><apex:commandlink value="Others" action="{!Category}"><apex:actionsupport event="onclick" rerender="articlespace"/><apex:param name="category" value="Other"/></apex:commandlink> </li>
+         </ul>
+     </li>
+ </ul>
+ </div>
+</div>
+<!-- end #sidebar -->
+<div style="clear: both;">&nbsp;</div>
+</div>
+<!-- end #page -->
+<div style="text-align: center; font-size: 0.75em;">Design downloaded from <a href="http://www.freewebtemplates.com/">free website templates</a>.</div>
+
+</apex:form>
+    </body>
+    </html>
+</apex:page>

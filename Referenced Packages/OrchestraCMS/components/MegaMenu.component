@@ -1,0 +1,73 @@
+<apex:component controller="cms.ClassStyledMenu" >
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+	
+	<apex:attribute name="page_content_layout_instance" type="cms__Page_Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!page_content_layout_instance}" />
+	<apex:attribute name="page_content_layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!page_content_layout_instance_properties}" />
+
+	<apex:attribute name="content_children" type="cms.ContentTreeNode" description="The panel unique identifier"  assignTo="{!children_nodes}" />
+	<apex:attribute name="content_children_attributes" type="cms.AttributeWrapper" description="The panel unique identifier" assignTo="{!children_nodes_attributes}" />
+	
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!pm}" />
+	<apex:attribute name="preview_parameters" type="String" description="The page mode that the site is being rendered in" assignTo="{!pp}" />	
+	<apex:attribute name="filter_by_profile" type="Boolean" description="The page mode that the site is being rendered in" assignTo="{!fbp}" />
+	
+	
+	<div class="mega-menu">
+		<ul class="root-level-list">
+			<apex:repeat value="{!OrderedRootNodes}" var="node">
+				<li class="root-level-item {!IF(node.active,'active','')} {!IF(node.Order == '0' ,'first','')} {!IF(node.Order == TEXT(OrderedRootNodes.size-1),'last','')} item{!node.Order} {!IF(node.showAlt,'alt','')}" >
+					<div class="holder">
+						<apex:outputLink value="{!URLFOR(node.targetPage)}" onclick="{!node.javascript}" target="{!node.target}"><span><apex:outputText value="{!HTMLENCODE(node.menu_item.cms__Name__c)}" escape="false"/></span></apex:outputLink>
+						<div class="drop">
+							<div class="drop-t">&nbsp;</div>
+							<div class="drop-holder">
+								<div class="drop-frame">
+									<apex:repeat value="{!node.orderedGroups}" var="group">
+										<ul class="level-1-list group-{!group.groupNumber}">
+											<apex:repeat value="{!group.children}" var="child1">							
+								      			<li class="level-1-item {!IF(child1.active,'active','')} {!IF(child1.Order == '0' ,'first','')} {!IF(child1.Order == TEXT(node.OrderedChildren.size-1),'last','')} item{!child1.Order}">
+								      		    	<apex:outputLink value="{!URLFOR(child1.targetPage)}" onclick="{!node.javascript}" target="{!child1.target}">
+								      		        	<apex:outputText value="{!HTMLENCODE(child1.menu_item.cms__Name__c)}" escape="false"/>
+								      		        </apex:outputLink>
+								      		    </li>
+								      		    <apex:outputText escape="false" rendered="{!child1.OrderedChildren.size > 0}">
+								      		    	<ul class="level-2-list">
+								      		        	<apex:repeat value="{!child1.OrderedChildren}" var="child2">
+								      		            	<li class="level-2-item {!IF(child2.active,'active','')} {!IF(child2.Order == '0' ,'first','')} {!IF(child2.Order == TEXT(child1.OrderedChildren.size-1),'last','')} item{!child2.Order}">
+								      		                	<apex:outputLink value="{!URLFOR(child2.targetPage)}" onclick="{!node.javascript}" target="{!child2.target}">
+								      		                  		<apex:outputText value="{!HTMLENCODE(child2.menu_item.cms__Name__c)}" escape="false"/>
+								      		                	</apex:outputLink>
+															</li>
+								      		               <apex:outputText escape="false" rendered="{!child2.OrderedChildren.size > 0}">
+								      		               		<ul class="level-3-list">
+								      		                    	<apex:repeat value="{!child2.OrderedChildren}" var="child3">
+								      		                     		<li class="level-3-item {!IF(child3.active,'active','')} {!IF(child3.Order == '0' ,'first','')} {!IF(child3.Order == TEXT(child2.OrderedChildren.size-1),'last','')} item{!child3.Order}">
+																			<apex:outputLink value="{!URLFOR(child3.targetPage)}" onclick="{!node.javascript}" target="{!child3.target}">
+											      		                    	<apex:outputText value="{!HTMLENCODE(child3.menu_item.cms__Name__c)}" escape="false"/>
+																			</apex:outputLink>
+								      		                      		</li>
+								      		                    	</apex:repeat>
+								      		                  	</ul>
+								      		            	</apex:outputText>
+								      		        	</apex:repeat>		
+								      		    	</ul>
+								      			</apex:outputText>										
+											</apex:repeat>
+										</ul>
+									</apex:repeat>												
+								</div>	
+							</div>
+							<div class="drop-b">&nbsp;</div>
+						</div>
+					</div>
+				</li>
+			</apex:repeat>
+		</ul>
+	</div>	
+</apex:component>

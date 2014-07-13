@@ -1,0 +1,28 @@
+<apex:page showHeader="false" id="SiteTemplate">
+<style>
+/*
+body {
+	background : url({!$Resource.butterfly}) no-repeat center top;
+	background-size: 100%;
+}
+*/
+body { background:#111; font:13px/1.3 arial,sans-serif }
+</style>
+  <apex:stylesheet value="{!URLFOR($Resource.SiteSamples, 'SiteStyles.css')}"/>
+  <apex:insert name="header">
+  <!-- 
+    <c:SiteHeader />
+  -->
+    <c:CustomSiteHeader /> 
+    <hr/>
+  </apex:insert>
+  <apex:insert name="body"/>
+  <apex:insert name="footer">
+    <hr/>
+  <!--   
+    <c:SiteFooter />
+   -->
+   <c:CustomSiteFooter />
+    <site:googleAnalyticsTracking />
+  </apex:insert>
+</apex:page>

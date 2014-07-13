@@ -1,0 +1,2 @@
+<apex:page controller="cms.GenerateContent" standardStylesheets="false" showHeader="false" sidebar="false" id="g">
+</apex:page>

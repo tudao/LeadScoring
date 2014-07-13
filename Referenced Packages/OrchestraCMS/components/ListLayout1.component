@@ -1,0 +1,41 @@
+<apex:component controller="cms.ListLayout1">
+
+    <apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+    <apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+    <apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+    <apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+    <apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+    <div id="panel-button-{!content.Id}" class="panel-button" style="display: none; background-color:#{!BackgroundColor}; color:#{!FontColor}"> 
+        <apex:outputText rendered="{!!ISBLANK(ListTitle)}">
+            <div><span class="list-layout-1-title">{!ListTitle}</span></div>
+        </apex:outputText>
+    </div>
+    
+    <div class="panel" id="panel-{!content.Id}" style="background-color:#{!BackgroundColor}; color:#{!FontColor}; height: {!ListLayout1Height};">
+        <div><span class="list-layout-1-title">{!ListTitle}</span></div>
+        <div class="list-layout-1-content">
+        <apex:outputText escape="false">
+                <apex:repeat value="{!listContent}" var="item"> 
+                        <div class="post {!IF(item.index == 0, 'first','')} {!IF(item.index == listContent.size + 1, 'last','')}">
+                            <c:Listable morelink="{!item.morelink}" target="{!item.link.target}" targetPage="{!item.link.targetPage}" javascript="{!item.link.javascript}" color="{!FontColor}" bgcolor="{!BackgroundColor}" content="{!item.content}" properties="{!item.properties}" contentController="{!layout_controller}" rendered="{!item.showListable}" />
+                            <c:ListableWithImage morelink="{!item.morelink}" target="{!item.link.target}" targetPage="{!item.link.targetPage}" javascript="{!item.link.javascript}" color="{!FontColor}" bgcolor="{!BackgroundColor}" orginal_published_date="{!item.original_published_date}" content="{!item.content}" properties="{!item.properties}" contentController="{!layout_controller}" rendered="{!item.showListableWithImage}" />
+                        </div>
+                </apex:repeat>
+        </apex:outputText>
+        </div>
+        <div class="list-layout-1-link" style="{!LinkDisplay}">
+            
+            <apex:outputLink value="{!IF(MoreLinkObj.targetPage != null, URLFOR(MoreLinkObj.targetPage), '#')}" target="{!MoreLinkObj.target}" onclick="{!MoreLinkObj.javascript}" rendered="{!showTargetImage}">
+                <img alt="{!MoreTargetText}" src="{!MoreTargetImage}" onmouseover="this.src = '{!MoreTargetHoverImage}'" onmouseout="this.src = '{!MoreTargetImage}'" />
+            </apex:outputLink>
+            
+            <apex:outputLink value="{!IF(MoreLinkObj.targetPage != null, URLFOR(MoreLinkObj.targetPage), '#')}" target="{!MoreLinkObj.target}" onclick="{!MoreLinkObj.javascript}" rendered="{!showTargetText}">
+                <apex:outputText value="{!MoreTargetText}" />
+            </apex:outputLink>
+            
+        </div>
+    </div>
+
+</apex:component>

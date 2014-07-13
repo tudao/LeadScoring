@@ -1,0 +1,112 @@
+<apex:page id="installer" controller="cms.SiteDetails" showHeader="false" sidebar="false" standardStylesheets="false" cache="false" title="OrchestraCMS">
+
+<html style="padding: 0px; margin: 0px;">
+
+<head>
+	 <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery.min.js')}" />
+ 	 <!-- This is the jquery cookie extension only -->
+	 <apex:includeScript value="{!$Resource.cms__jquery}" />
+	 <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery-ui.custom.min.js')}" />		
+ 	 <apex:stylesheet value="{!URLFOR($Resource.cms__jqueryui, '/css/ocms.css')}" />
+</head>
+
+<body>
+
+<apex:outputPanel rendered="{!hasAccess}">
+
+	<c:SetupMenu sname="{!sname}" activeitem="site-details" />
+	
+	<apex:outputPanel id="main" layout="block" style="margin-left: 210px; padding: 10px;">
+	
+		<div class="ocms-setup-breadcrumb">
+		  <div class="ocms-setup-breadcrumb-start"></div>
+		  <div class="ocms-setup-breadcrumb-item">Setup</div>
+		  <div class="ocms-setup-breadcrumb-separator-active"></div>		  
+		  <div class="ocms-setup-breadcrumb-item-active">Site Details</div>
+		  <div class="ocms-setup-breadcrumb-end"></div>
+		  <div class="ocms-clear"></div>
+		</div>
+		<br />
+		
+		<apex:form id="DetailForm">
+			<table border="0" cellspacing="0" cellpadding="0">
+			
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site Name:</td>
+			  <td style="padding: 5px 5px 5px 0px;"><strong>{!site.Site_Name__c}</strong></td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site Domain:</td>
+			  <td style="padding: 5px 5px 5px 0px;">
+			  		<apex:outputText escape="false" value="{!site.cms__Site_Domain__c}" rendered="{!!Edit}" />
+			  		<apex:inputField value="{!site.cms__Site_Domain__c}" rendered="{!Edit}"  style="width:400px;" />
+			  </td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site Secure Domain:</td>
+			  <td style="padding: 5px 5px 5px 0px;">
+			  	<apex:outputText escape="false" value="{!site.cms__Site_Secure_Domain__c}" rendered="{!!Edit}" />
+			  	<apex:inputField value="{!site.cms__Site_Secure_Domain__c}" rendered="{!Edit}"  style="width:400px;" />
+			  </td>
+			</tr>			
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site Prefix:</td>
+			  <td style="padding: 5px 5px 5px 0px;">
+			  	<apex:outputText escape="false" rendered="{!!Edit}" >
+			  		{!site.cms__Site_Prefix__c}
+			  	</apex:outputText>
+				<apex:outputText escape="false" rendered="{!Edit}" >
+					<apex:inputField value="{!site.cms__Site_Prefix__c}"  style="width:200px;" />
+				</apex:outputText>
+			  </td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site URL:</td>
+			  <td style="padding: 5px 5px 5px 0px;">
+			  	<apex:outputText escape="false" rendered="{!!Edit}" >
+			  		<a href="{!site.cms__Site_URL__c}" target="_blank">{!site.cms__Site_URL__c}</a>
+			  	</apex:outputText>
+				<apex:outputText escape="false" rendered="{!Edit}" >
+					<apex:inputField value="{!site.cms__Site_URL__c}"  style="width:400px;" />
+				</apex:outputText>
+			  </td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Site Secure URL:</td>
+			  <td style="padding: 5px 5px 5px 0px;">
+			  	<apex:outputText escape="false" rendered="{!!Edit}" >
+			  		<a href="{!site.cms__Site_Secure_URL__c}" target="_blank">{!site.cms__Site_Secure_URL__c}</a>
+			  	</apex:outputText>
+			  	<apex:outputText escape="false" rendered="{!Edit}" >
+			  		<apex:inputField value="{!site.cms__Site_Secure_URL__c}"  style="width:400px;" />
+			  	</apex:outputText>			  	
+			  </td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;">Package Prefix:</td>
+			  <td style="padding: 5px 5px 5px 0px;"><apex:outputText escape="false" value="{!package_prefix}"/></td>
+			</tr>
+			<tr>
+			  <td style="padding: 5px 5px 5px 0px;" colspan="2">
+			  	<apex:commandbutton value="Edit" action="{!EditDetails}" rerender="DetailForm" rendered="{!!Edit}"/>
+			  	<apex:commandButton value="Save" action="{!SaveDetails}" rerender="DetailForm" rendered="{!Edit}" />
+			  </td>
+			</tr>
+			</table>
+		</apex:form>
+	
+	</apex:outputPanel>
+
+</apex:outputPanel>
+
+<apex:outputPanel rendered="{!!hasAccess}">
+  	<div style="padding: 10px;">
+  		You do not have Setup > Site Details permission
+   	</div>
+</apex:outputPanel>  
+
+</body>
+
+</html>
+
+</apex:page>

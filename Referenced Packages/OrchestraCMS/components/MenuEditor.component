@@ -1,0 +1,74 @@
+<apex:component controller="cms.MenuEditorController" >
+        
+        <apex:attribute name="content" type="cms__Content__c" description="The menu" assignTo="{!menu}" />
+		<apex:attribute name="disabled" type="Boolean" description="Current Disabled State" assignTo="{!disabled}" />
+                
+        <c:CmsStyles /> 
+        <c:CmsScripts />
+
+        <apex:stylesheet value="{!$Resource.cms__ControlsCSS}" />
+        <apex:stylesheet value="{!$Resource.cms__MenuEditorCSS}" />
+        
+        <apex:includeScript value="{!$Resource.cms__PageSelector}" />
+        <apex:includeScript value="{!$Resource.cms__MenuEditor}" />
+
+        <script type="text/javascript">
+            
+                $(document).ready(function() {                 
+                        $("#EditorContainer").menu_editor({
+                                JSONMenu: {!JSONMenu},
+                                sname: '{!JSENCODE(content.Site_Name__c)}',
+                                menu_id : '{!JSENCODE(menu.Id)}',
+                                isPublished: {!content.Published__c},
+		   						isDisabled: {!disabled},                                
+                                ajaxLoaderImage: '{!$Resource.ajaxLoader}',
+                                tooltipImage: '{!URLFOR($Resource.jqueryui, '/css/images/Toolbar/IconToolbarHelp48.png')}',
+                                handleIcon: '{!URLFOR($Resource.CmsImages, '/handle.png' )}',
+                                removeIcon: '{!URLFOR($Resource.CmsImages, '/btn_remove.png' )}',
+                                editIcon: '{!URLFOR($Resource.CmsImages, '/btn_edit.png' )}',
+                                shareIcon: '{!URLFOR($Resource.CmsImages, '/btn_page_properties.png' )}',
+                        		allowPublicTags: {!allowPublicTags},
+                        		allowPersonalTags: {!allowPersonalTags}
+                        });
+                                
+               		 $('.tooltip').mouseover(function(e){
+                                text = $(this).find('.tooltipText').html();
+                                $('body').append(
+                                        '<div class="livetooltip" style="font-family: arial; font-size: 12px; width: 150px; border: 1px solid #EEA00B; background-color: #FEF3A7; padding: 10px; position: absolute; left: ' + e.pageX + 'px; top: ' + e.pageY + 'px;">' + 
+                                        text +  
+                                        '</div>'
+                                );
+                        });
+
+                        $('.tooltip').mouseout(function(){
+                                $('body').find('.livetooltip').remove();
+                        });                     
+                                
+                });
+        </script>
+        <style type="text/css">
+        	
+        	.edit-menu{
+        		
+        		padding:5px;
+        		margin-left: 5px;
+        		font-size: 12px;
+        		font-family: arial;
+        	}
+       
+       </style>
+              
+    <apex:outputPanel id="o" layout="block" styleClass="edit-menu" >
+       
+        <table border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td style="font-size: 12px; font-weight: bold; font-family: arial;">Menu Items:</td>
+          </tr>
+        </table>
+        
+        <br />
+        <div id="EditorContainer">
+        </div>    
+        
+    </apex:outputPanel>
+</apex:component>

@@ -1,0 +1,10 @@
+<apex:page controller="cms.GenerateContent" standardStylesheets="false" showHeader="false" sidebar="false" id="g">
+	<html>
+	<head></head>
+	<body>		
+	{:Start:}
+		<c:CarouselImage content="{!content}" properties="{!properties}" layout_instance="{!cli}" layout_instance_properties="{!cli_properties}" /> 
+	{:Stop:}
+	</body>
+	</html>
+</apex:page>

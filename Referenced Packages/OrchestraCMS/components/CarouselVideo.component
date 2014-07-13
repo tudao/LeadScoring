@@ -1,0 +1,19 @@
+<apex:component controller="cms.CarouselVideo">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+
+	<apex:image value="{!CarouselImage}" alt="{!AltText}" title="{!TitleText}" />
+	<div class="video">
+		<div>
+			<apex:outputText escape="false" value="{!CarouselVideo}" />			
+		</div>
+	</div>
+						
+
+</apex:component>

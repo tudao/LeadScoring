@@ -1,0 +1,164 @@
+<apex:component >
+
+    <apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" />
+    <apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" />
+
+    <apex:attribute name="layout" type="cms__Content_Layout__c" description="The panel unique identifier" />
+    <apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier"  />
+    <apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" />
+
+    <apex:attribute name="coreController" type="cms.CoreController" description="the core controller" />
+
+    <apex:attribute name="page_content_layout_instance" type="cms__Page_Content_Layout_Instance__c" description="The panel unique identifier" />
+    <apex:attribute name="page_content_layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier"  />
+
+    <apex:attribute name="content_children" type="cms.ContentTreeNode" description="The panel unique identifier"  />
+    <apex:attribute name="content_children_attributes" type="cms.AttributeWrapper" description="The panel unique identifier" />
+
+    <c:Breadcrumb content_children="{!content_children}"
+                  content_children_attributes="{!content_children_attributes}"
+                  content="{!content}"
+                  properties="{!properties}"
+                  layout_instance="{!layout_instance}"
+                  layout_instance_properties="{!layout_instance_properties}"
+                  page_mode="{!coreController.router.page_mode}"
+                  site_name="{!coreController.router.site_name}"
+                  page_content_layout_instance="{!page_content_layout_instance}"
+                  page_content_layout_instance_properties="{!page_content_layout_instance_properties}"
+                  rendered="{!layout.cms__Component_Name__c == 'Breadcrumb'}"
+                  filter_by_profile="{!coreController.router.page_filter_profile}"
+                  preview_parameters="{!coreController.router.linkParameters}" />
+
+    <c:ClassStyledMenu content_children="{!content_children}"
+                       content_children_attributes="{!content_children_attributes}"
+                       content="{!content}"
+                       properties="{!properties}"
+                       layout_instance="{!layout_instance}"
+                       layout_instance_properties="{!layout_instance_properties}"
+                       page_mode="{!coreController.router.page_mode}"
+                       site_name="{!coreController.router.site_name}"
+                       preview_parameters="{!coreController.router.linkParameters}"
+                       page_content_layout_instance="{!page_content_layout_instance}"
+                       page_content_layout_instance_properties="{!page_content_layout_instance_properties}"
+                       rendered="{!layout.cms__Component_Name__c == 'ClassStyledMenu'}"
+                       filter_by_profile="{!coreController.router.page_filter_profile}" />
+
+    <c:CustomHtml content="{!content}"
+                  properties="{!properties}"
+                  layout_instance="{!layout_instance}"
+                  layout_instance_properties="{!layout_instance_properties}"
+                  contentController="{!coreController}"
+                  rendered="{!layout.cms__Component_Name__c == 'CustomHtml'}" />
+
+    <c:DocumentStyle1 content="{!content}"
+                      properties="{!properties}"
+                      layout_instance="{!layout_instance}"
+                      layout_instance_properties="{!layout_instance_properties}"
+                      contentController="{!coreController}"
+                      rendered="{!layout.cms__Component_Name__c == 'DocumentStyle1'}" />
+
+    <c:Flash content="{!content}"
+             properties="{!properties}"
+             layout_instance="{!layout_instance}"
+             layout_instance_properties="{!layout_instance_properties}"
+             contentController="{!coreController}"
+             rendered="{!layout.cms__Component_Name__c == 'Flash'}" />
+
+    <c:HorizontalImageBar content="{!content}"
+                          properties="{!properties}"
+                          layout_instance="{!layout_instance}"
+                          layout_instance_properties="{!layout_instance_properties}"
+                          contentController="{!coreController}"
+                          rendered="{!layout.cms__Component_Name__c == 'HorizontalImageBar'}" />
+
+    <c:Image content="{!content}"
+              properties="{!properties}"
+              layout_instance="{!layout_instance}"
+              layout_instance_properties="{!layout_instance_properties}"
+              contentController="{!coreController}"
+              rendered="{!layout.cms__Component_Name__c == 'Image'}" />
+
+    <c:ListLayout1 content="{!content}"
+                   properties="{!properties}"
+                   layout_instance="{!layout_instance}"
+                   layout_instance_properties="{!layout_instance_properties}"
+                   contentController="{!coreController}"
+                   rendered="{!layout.cms__Component_Name__c == 'ListLayout1'}"/>
+
+    <c:MegaMenu content_children="{!content_children}"
+                content_children_attributes="{!content_children_attributes}"
+                content="{!content}"
+                properties="{!properties}"
+                layout_instance="{!layout_instance}"
+                layout_instance_properties="{!layout_instance_properties}"
+                page_mode="{!coreController.router.page_mode}"
+                site_name="{!coreController.router.site_name}"
+                preview_parameters="{!coreController.router.linkParameters}"
+                page_content_layout_instance="{!page_content_layout_instance}"
+                page_content_layout_instance_properties="{!page_content_layout_instance_properties}"
+                rendered="{!layout.cms__Component_Name__c == 'MegaMenu'}"
+                filter_by_profile="{!coreController.router.page_filter_profile}" />
+
+    <c:PlainText content="{!content}"
+                 properties="{!properties}"
+                 layout_instance="{!layout_instance}"
+                 layout_instance_properties="{!layout_instance_properties}"
+                 contentController="{!coreController}"
+                 rendered="{!layout.cms__Component_Name__c == 'PlainText'}" />
+
+    <c:SimpleHorizontalMenu content_children="{!content_children}"
+                            content_children_attributes="{!content_children_attributes}"
+                            content="{!content}"
+                            properties="{!properties}"
+                            page_mode="{!coreController.router.page_mode}"
+                            site_name="{!coreController.router.site_name}"
+                            preview_parameters="{!coreController.router.linkParameters}"
+                            layout_instance="{!layout_instance}"
+                            layout_instance_properties="{!layout_instance_properties}"
+                            contentController="{!coreController}"
+                            rendered="{!layout.cms__Component_Name__c == 'SimpleHorizontalMenu'}"
+                            filter_by_profile="{!coreController.router.page_filter_profile}" />
+
+    <c:SmallBlock content="{!content}"
+                  properties="{!properties}"
+                  layout_instance="{!layout_instance}"
+                  layout_instance_properties="{!layout_instance_properties}"
+                  contentController="{!coreController}"
+                  rendered="{!layout.cms__Component_Name__c == 'SmallBlock'}" />
+
+    <c:SmallBlockWithImage content="{!content}"
+                           properties="{!properties}"
+                           layout_instance="{!layout_instance}"
+                           layout_instance_properties="{!layout_instance_properties}"
+                           contentController="{!coreController}"
+                           rendered="{!layout.cms__Component_Name__c == 'SmallBlockWithImage'}" />
+
+    <c:Spacer content="{!content}"
+              properties="{!properties}"
+              layout_instance="{!layout_instance}"
+              layout_instance_properties="{!layout_instance_properties}"
+              rendered="{!layout.cms__Component_Name__c == 'Spacer'}" />
+
+    <c:TextBlock content="{!content}"
+                 properties="{!properties}"
+                 layout_instance="{!layout_instance}"
+                 layout_instance_properties="{!layout_instance_properties}"
+                 contentController="{!coreController}"
+                 rendered="{!layout.cms__Component_Name__c == 'TextBlock'}" />
+
+    <c:ClassStyledSiteMap content_children="{!content_children}"
+                       content_children_attributes="{!content_children_attributes}"
+                       content="{!content}"
+                       properties="{!properties}"
+                       layout_instance="{!layout_instance}"
+                       layout_instance_properties="{!layout_instance_properties}"
+                       page_mode="{!coreController.router.page_mode}"
+                       site_name="{!coreController.router.site_name}"
+                       preview_parameters="{!coreController.router.linkParameters}"
+                       page_content_layout_instance="{!page_content_layout_instance}"
+                       page_content_layout_instance_properties="{!page_content_layout_instance_properties}"
+                       rendered="{!layout.cms__Component_Name__c == 'ClassStyledSiteMap'}"
+                       filter_by_profile="{!coreController.router.page_filter_profile}" />
+
+
+</apex:component>

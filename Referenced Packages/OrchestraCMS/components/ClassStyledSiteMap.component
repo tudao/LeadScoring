@@ -1,0 +1,60 @@
+<!-- c:SiteMap_dwl -->
+<apex:component controller="cms.ClassStyledSiteMap">
+	<apex:attribute type="cms__Content__c"
+		name="content"
+		assignTo="{!content}"
+		description="the content" />
+	<apex:attribute type="cms__Attribute__c[]"
+		name="properties"
+		assignTo="{!content_properties}"
+		description="properties of the content" />
+    <apex:attribute type="cms__Content_Layout_Instance__c"
+    	name="layout_instance"
+    	assignTo="{!content_layout_instance}"
+		description="layout instance of the content" />
+    <apex:attribute type="cms__Attribute__c[]"
+		name="layout_instance_properties"
+    	assignTo="{!content_layout_instance_properties}"
+		description="properties of the layout instance for the content" />
+    <apex:attribute type="cms__Page_Content_Layout_Instance__c"
+    	name="page_content_layout_instance"
+    	assignTo="{!page_content_layout_instance}"
+    	description="page content layout instance" />
+    <apex:attribute type="cms__Attribute__c[]"
+    	name="page_content_layout_instance_properties"
+		assignTo="{!page_content_layout_instance_properties}"
+    	description="page content layout instance properties"  />
+
+    <apex:attribute type="String"
+    	name="site_name"
+		assignTo="{!sn}"
+		description="The name of the site the component is being rendered in" />
+    <apex:attribute type="String"
+    	name="page_mode"
+		assignTo="{!pm}"
+    	description="The page mode that the site is being rendered in" />
+    <apex:attribute type="String"
+    	name="preview_parameters"
+    	assignTo="{!pp}"
+    	description="parameters for preview" />
+    <apex:attribute type="Boolean"
+    	name="filter_by_profile"
+    	assignTo="{!fbp}"
+    	description="filter by profile: true/false" />
+
+	<!-- Site Map additional requirements -->
+    <apex:attribute type="cms.ContentTreeNode"
+    	name="content_children"
+    	assignTo="{!children_nodes}"
+    	description="the content in tree form" />
+    <apex:attribute type="cms.AttributeWrapper"
+    	name="content_children_attributes"
+    	assignTo="{!children_nodes_attributes}"
+    	description="properties associated with the content in tree form" />
+
+<div class="sitemap">
+    <apex:outputText escape="false" value="{!HTML}" />
+</div>
+<div class="sitemap-end"></div>
+</apex:component>
+<!-- c:SiteMap_dwl -->

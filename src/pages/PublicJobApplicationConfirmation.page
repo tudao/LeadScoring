@@ -1,0 +1,12 @@
+<apex:page title="Job Application" showHeader="false" standardStylesheets="true">
+<!-- The site template provides the layout and the style for the site -->
+      <apex:form >
+        <!-- Breadcrum link back to the search page -->
+        <apex:commandLink value="<- Back to Job Search" onclick="window.top.location='{!$Site.Prefix}/PublicJobs';return false;" />
+        <br/>
+        <br/>
+        <center><apex:outputText value="Your application has been saved. Thank you for your interest!"/></center>
+        <br/>
+        <br/>
+      </apex:form>
+</apex:page>

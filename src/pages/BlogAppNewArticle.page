@@ -1,0 +1,65 @@
+<apex:page controller="BlogAppController" showheader="false">
+    <html>
+<head>
+<title>Blog Application</title>
+<title>Blog Application</title>
+<apex:include pageName="BlogAppCSS"/>
+</head>
+<body>
+
+<c:BlogAppHeader ></c:BlogAppHeader>
+
+<div id="page">
+<apex:form >
+    <!--- Copied code from blog edit --->
+     <!-- Skin CSS file -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.3.0/build/assets/skins/sam/skin.css" />
+
+     <!-- Utility Dependencies -->
+         <script src="http://yui.yahooapis.com/2.3.0/build/utilities/utilities.js"></script>
+
+     <!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+         <script src="http://yui.yahooapis.com/2.3.0/build/container/container-min.js"></script>
+         <script src="http://yui.yahooapis.com/2.3.0/build/menu/menu-min.js"></script>
+         <script src="http://yui.yahooapis.com/2.3.0/build/button/button-beta-min.js"></script>
+     <!-- Source file for Rich Text Editor-->
+         <script src="http://yui.yahooapis.com/2.3.0/build/editor/editor-beta-min.js"></script>
+         <div style="position:relative;left:100px;">
+        <table cellspacing="7">
+         <tr><td style="text-align:right;">Title</td> <td><apex:inputtext value="{!article.Name}"/></td>
+         <td style="text-align:right;">Your Name</td><td><apex:inputtext value="{!article.Author__c}"/></td>
+         <td> Category </td> <td> <apex:inputfield value="{!article.Category__c}"/></td></tr>
+        </table>
+         </div>
+     <div class="yui-skin-sam" style="display:none" id="editor" align="center" >
+         <pre>            
+             <apex:commandlink style="position:absolute;left:425px;" action="{!SaveArticle}" onClick="beforeTextSave()"> <apex:image url="{!$Resource.SaveArticle}"/> </apex:commandlink>
+             <br/>
+             <apex:inputtextarea id="msgpost" cols="500" rows="50" value="{!article.Article_Description__c}"/>
+         </pre>
+     </div>
+
+ <script type="text/javascript" >
+     var myEditor;
+     window.onload = function init()
+     {
+      myEditor = new YAHOO.widget.Editor('{!$Component.msgpost}', {
+        height: '400px', width: '722px', dompath: true, animate: true });
+      myEditor.render();
+      document.getElementById('editor').style.display='';
+     }
+     function beforeTextSave()
+     {
+      document.getElementById('{!$Component.msgpost}').value = myEditor.getEditorHTML();
+     }
+
+ </script>
+
+<!-- End of copied code from blog edit -->
+    </apex:form>
+
+</div>
+<div style="text-align: center; font-size: 0.75em;">Design downloaded from <a href="http://www.freewebtemplates.com/">free website templates</a>.</div>
+    </body>
+    </html>
+</apex:page>

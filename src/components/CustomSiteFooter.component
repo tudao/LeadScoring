@@ -1,0 +1,7 @@
+<apex:component id="headerComponent">
+
+	<apex:outputLink value="{!$Site.Prefix}"><apex:image url="{!$Resource.home}" width="100" height="30"/></apex:outputLink>
+	<div style="float:right">
+    	<apex:image url="{!$Resource.SitesDemo}" alt="Force.com Sites Demo" width="233" height="55" title="Force.com Sites Demo"/>
+    </div>
+</apex:component>

@@ -1,0 +1,133 @@
+<apex:component controller="cms.BasicController">
+
+  	<apex:attribute name="debug" type="Boolean" description="Whether to enable debug logging" default="false"/>
+  	<apex:attribute name="lang" type="String" description="The language file to load" default="en"/>
+
+ 	<apex:includeScript value="{!$Resource.cms__IEScripts}" />
+ 	<apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery.min.js')}" />
+  	<apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery-ui.custom.min.js')}" />
+    <apex:includeScript value="{!URLFOR($Resource.cms__CmsLocalization, '/localization/CmsLocalization_'+lang+'.js')}" />
+ 	<!-- This is the jquery cookie extension only -->
+ 	<apex:includeScript value="{!$Resource.cms__jquery}" />	
+ 	<apex:includeScript value="{!URLFOR($Resource.cms__OrchestraCMSPublic, '/RESTProxy.js')}" />
+ 	<apex:includeScript value="{!$Resource.cms__OCMSScripts}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryInheritance}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryDebug}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryUILayout}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryGeneral}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryInlineEditor}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryComboBox}" />
+    <apex:includeScript value="{!$Resource.cms__JQueryMessagePane}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryDialogs}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryMenu}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryCheckbox}" />
+ 	<apex:includeScript value="{!$Resource.cms__MainTabController}" />
+ 	<apex:includeScript value="{!$Resource.cms__ToolTip}" />
+	<apex:includeScript value="{!$Resource.cms__jquery_ocms}" />
+	<apex:includeScript value="{!$Resource.cms__JQuerySearchBar}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryTree}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryList}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryActionBar}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryInput}" />
+    <apex:includeScript value="{!$Resource.cms__DateTimeSelector}" />
+    <apex:includeScript value="{!$Resource.cms__PageUrlSelector}" />
+	<apex:includeScript value="{!$Resource.cms__JQueryWizard}" />
+	<apex:includeScript value="{!$Resource.cms__PageSelectorInput}" />
+
+
+	<script type="text/javascript">
+		{!IF(debug, 'turnOnDebug();', '')}
+        $(document).data('sname', '{!JSENCODE(sname)}');
+        $(document).data("help_icon",                   "{!URLFOR($Resource.jqueryui,'/css/images/Toolbar/IconToolbarHelp48.png')}");
+	    $(document).data("loading_indicator",           "{!URLFOR($Resource.jqueryui, '/css/images/General/32px_AnimatedIndeterminateProgress.gif')}");
+	    $(document).data("loading_indicator_text",      "{!URLFOR($Resource.jqueryui, '/css/images/General/80px_AnimatedIndeterminateProgress.gif')}");
+	    $(document).data("clear_dot_image",             "{!URLFOR($Resource.jqueryui, '/css/images/cleardot.gif')}");
+	    $(document).data("btn_close_active",            "{!URLFOR($Resource.jqueryui, '/css/images/Icons/btnCloseActive.png')}");
+	    $(document).data("btn_close_inactive",          "{!URLFOR($Resource.jqueryui, '/css/images/Icons/btnCloseInactive.png')}");
+		$(document).data("layout_selected",				"{!URLFOR($Resource.CmsImages,'/layout_selected.png')}");
+		$(document).data("layout",				        "{!URLFOR($Resource.CmsImages,'/layout.png')}");
+		$(document).data("cms_localization",            "{!URLFOR($Resource.CmsLocalization)}");
+
+        $(document).data("cms_PageManagerDlgs",         "{!URLFOR($Resource.PageManagerDlgs)}");
+        $(document).data("cms_LibraryBrowser",          "{!URLFOR($Resource.LibraryBrowser)}");
+        $(document).data("cms_JQueryWidgetGenerator",   "{!URLFOR($Resource.JQueryWidgetGenerator)}");
+        $(document).data("cms_JQueryValidation",        "{!URLFOR($Resource.JQueryValidation)}");
+        $(document).data("cms_JQueryProperties",        "{!URLFOR($Resource.JQueryProperties)}");
+        $(document).data("cms_JQueryDateTimePicker",    "{!URLFOR($Resource.JQueryDateTimePicker)}");
+        $(document).data("cms_TagEditor",               "{!URLFOR($Resource.TagEditor)}");
+        $(document).data("cms_CachingUtilities",        "{!URLFOR($Resource.CachingUtilities)}");
+
+
+		//include references or internal page and content templates
+		var templates = {
+			thumbnail: {
+				Everready: '{!URLFOR($Resource.CmsImages,'/layout_Everready.png')}',
+				EverreadyForm: '{!URLFOR($Resource.CmsImages,'/layout_EverreadyForm.png')}',
+				EverreadyThreeColumn: '{!URLFOR($Resource.CmsImages,'/layout_Everready.png')}',
+				Skyward: '{!URLFOR($Resource.CmsImages,'/layout_Skyward.png')}',
+				SkywardForm: '{!URLFOR($Resource.CmsImages,'/layout_SkywardForm.png')}',
+				SkywardTwoColumn: '{!URLFOR($Resource.CmsImages,'/layout_SkywardTwoColumn.png')}',
+				Spotlight: '{!URLFOR($Resource.CmsImages,'/layout_Spotlight.png')}',
+				SpotlightForm: '{!URLFOR($Resource.CmsImages,'/layout_SpotlightForm.png')}',
+				SpotlightThreeColumn: '{!URLFOR($Resource.CmsImages,'/layout_SpotlightThreeColumn.png')}',
+				SpotlightTwoColumn: '{!URLFOR($Resource.CmsImages,'/layout_SpotlightTwoColumn.png')}',
+				SingleColumn: '{!URLFOR($Resource.CmsImages,'/layout_SingleColumn.png')}',
+				ThreeColumnFluid: '{!URLFOR($Resource.CmsImages,'/layout_ThreeColumnFluid.png')}',
+				UrbanSport: '{!URLFOR($Resource.CmsImages,'/layout_UrbanSport.png')}',
+				PortalLogin: '{!URLFOR($Resource.CmsImages,'/layout_PortalLogin.png')}',
+				UrbanSportForm: '{!URLFOR($Resource.CmsImages,'/layout_UrbanSportForm.png')}',
+				UrbanSportThreeColumn: '{!URLFOR($Resource.CmsImages,'/layout_UrbanSportThreeColumn.png')}',
+				UrbanStorefront: '{!URLFOR($Resource.CmsImages,'/layout_UrbanStorefront.png')}',
+				UrbanStorefrontForm: '{!URLFOR($Resource.CmsImages,'/layout_UrbanStorefrontForm.png')}',
+				UrbanStorefrontSingleColumn: '{!URLFOR($Resource.CmsImages,'/layout_UrbanStorefrontSingleColumn.png')}',
+				UrbanStorefrontTwoColumn: '{!URLFOR($Resource.CmsImages,'/layout_UrbanStorefrontTwoColumn.png')}',
+				Zen: '{!URLFOR($Resource.CmsImages,'/layout_Zen.png')}',
+				ZenForm: '{!URLFOR($Resource.CmsImages,'/layout_ZenForm.png')}',
+				ZenThreeColumn: '{!URLFOR($Resource.CmsImages,'/layout_ZenThreeColumn.png')}',
+				ZenTwoColumn: '{!URLFOR($Resource.CmsImages,'/layout_ZenTwoColumn.png')}',
+				NoImage: '{!URLFOR($Resource.CmsImages,'/layout_no_image.png')}',
+				Breadcrumb: '{!URLFOR($Resource.CmsImages,'/layout_Breadcrumb.png')}',
+				CarouselImage: '{!URLFOR($Resource.CmsImages,'/layout_CarouselImage.png')}',
+				CarouselVideo: '{!URLFOR($Resource.CmsImages,'/layout_CarouselVideo.png')}',
+				ClassStyledMenu: '{!URLFOR($Resource.CmsImages,'/layout_ClassStyledMenu.png')}',
+				CustomHtml: '{!URLFOR($Resource.CmsImages,'/layout_CustomHtml.png')}',
+				DocumentStyle1: '{!URLFOR($Resource.CmsImages,'/layout_DocumentStyle1.png')}',
+				Flash: '{!URLFOR($Resource.CmsImages,'/layout_Flash.png')}',
+				HorizontalImageBar: '{!URLFOR($Resource.CmsImages,'/layout_HorizontalImageBar.png')}',
+				Image: '{!URLFOR($Resource.CmsImages,'/layout_Image.png')}',
+				Listable: '{!URLFOR($Resource.CmsImages,'/layout_Listable.png')}',
+				ListableWithImage: '{!URLFOR($Resource.CmsImages,'/layout_ListableWithImage.png')}',
+				ListLayout1: '{!URLFOR($Resource.CmsImages,'/layout_ListLayout1.png')}',
+				MegaMenu: '{!URLFOR($Resource.CmsImages,'/layout_MegaMenu.png')}',
+				PlainText: '{!URLFOR($Resource.CmsImages,'/layout_PlainText.png')}',
+				PortalChangePasswordForm: '{!URLFOR($Resource.CmsImages,'/layout_PortalChangePasswordForm.png')}',
+				PortalForgotPasswordForm: '{!URLFOR($Resource.CmsImages,'/layout_PortalForgotPasswordForm.png')}',
+				PortalLoginForm: '{!URLFOR($Resource.CmsImages,'/layout_PortalLoginForm.png')}',
+				PortalLoginStatus: '{!URLFOR($Resource.CmsImages,'/layout_PortalLoginStatus.png')}',
+				PortalRegisterForm: '{!URLFOR($Resource.CmsImages,'/layout_PortalRegisterForm.png')}',
+				SearchBasicForm: '{!URLFOR($Resource.CmsImages,'/layout_SearchBasicForm.png')}',
+				SearchBasicResults: '{!URLFOR($Resource.CmsImages,'/layout_SearchBasicResults.png')}',
+				SFObject: '{!URLFOR($Resource.CmsImages,'/layout_SFObject.png')}',
+				SimpleForm: '{!URLFOR($Resource.CmsImages,'/layout_SimpleForm.png')}',
+				SimpleHorizontalMenu: '{!URLFOR($Resource.CmsImages,'/layout_SimpleHorizontalMenu.png')}',
+				SmallBlock: '{!URLFOR($Resource.CmsImages,'/layout_SmallBlock.png')}',
+				SmallBlockWithImage: '{!URLFOR($Resource.CmsImages,'/layout_SmallBlockWithImage.png')}',
+				Spacer: '{!URLFOR($Resource.CmsImages,'/layout_Spacer.png')}',
+				SuperForm: '{!URLFOR($Resource.CmsImages,'/layout_SuperForm.png')}',
+				ClassStyledRecordList: '{!URLFOR($Resource.CmsImages,'/layout_ClassStyledRecordList.png')}',
+				ClassStyledRecordDetail: '{!URLFOR($Resource.CmsImages,'/layout_ClassStyledRecordDetail.png')}'
+			}
+		}
+
+		$(document).data('cms_templates', templates);
+
+		function jq(myid){
+	    	return '#'+myid.replace(/:/g,"\\:").replace(/\./g,"\\.");
+	    }
+	//    $.getScript($(document).data('cms_localization')+'/localization/CmsLocalization_en.js', function() {
+  	//		alert('Load was performed.');
+	//	});
+
+	</script>
+
+</apex:component>

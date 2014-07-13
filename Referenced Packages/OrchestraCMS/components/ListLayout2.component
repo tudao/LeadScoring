@@ -1,0 +1,43 @@
+<apex:component controller="cms.ListLayout2">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!site_name}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!page_mode}" />
+	<apex:attribute name="page_soql_timeline" type="String" description="the timeline to generate the results in" assignTo="{!page_soql_timeline}" />
+
+	<div id="panel-button-{!content.Id}" class="panel-button" style="display: none; background-color:#{!BackgroundColor}; color:#{!FontColor}">	
+		<apex:outputText rendered="{!!ISBLANK(ListTitle)}">
+			<div><span class="list-layout-1-title">{!ListTitle}</span></div>
+		</apex:outputText>
+	</div>
+
+	<div class="panel" id="panel-{!content.Id}" style="background-color:#{!BackgroundColor}; color:#{!FontColor}; height: {!ListLayout1Height};">
+	 	<div><span class="list-layout-1-title">{!ListTitle}</span></div>
+		<div class="list-layout-1-content">
+	 	<apex:outputText escape="false">
+			 	<apex:repeat value="{!listContent}" var="item"> 
+			 			<div class="post {!IF(item.index == 0, 'first','')} {!IF(item.index == listContent.size + 1, 'last','')}">
+							<apex:outputText value="{!item.Data}" escape="false"/>
+			 			</div>
+			 	</apex:repeat>
+		</apex:outputText>
+		</div>
+		<div class="list-layout-1-link" style="{!LinkDisplay}">
+					<apex:outputLink value="{!IF(MoreLinkObj.targetPage != null, URLFOR(MoreLinkObj.targetPage), '#')}" target="{!MoreLinkObj.target}" onclick="{!MoreLinkObj.javascript}" rendered="{!showTargetImage}">
+				<img alt="{!MoreTargetText}" src="{!MoreTargetImage}" onmouseover="this.src = '{!MoreTargetHoverImage}'" onmouseout="this.src = '{!MoreTargetImage}'" />
+			</apex:outputLink>
+			
+			<apex:outputLink value="{!IF(MoreLinkObj.targetPage != null, URLFOR(MoreLinkObj.targetPage), '#')}" target="{!MoreLinkObj.target}" onclick="{!MoreLinkObj.javascript}" rendered="{!showTargetText}">
+				<apex:outputText value="{!MoreTargetText}" />
+			</apex:outputLink>
+			
+		</div>
+	</div>
+
+</apex:component>

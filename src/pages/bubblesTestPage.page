@@ -1,0 +1,51 @@
+<apex:page controller="bubbleCon" id="thePage" tabStyle="Opportunity">
+  <apex:sectionHeader title="Opportunity" subtitle="My Opportunities"/>
+  <apex:form id="theForm" id="selectedBubbles">
+    <apex:panelGroup id="thePlot">
+      <c:bubblePlot id="bubblePlot" value="{!bubbles}" width="650" height="150" rerender="selectedBubbles" status="status"
+                    XLabelHigh="Closed" XLabelHighDescription="Higher Probability" XLabelLow="Open" XLabelLowDescription="Lower Probability"
+                    YLabelHigh="Alive" YLabelHighDescription="Recent Activity" YLabelLow="Dead" YLabelLowDescription="Neglected"
+                    sizeDescription="Opportunity Amount" primaryColor="#E5C130" secondaryColor="#EEECD1" colordescriptiongray="Each Opportunity"/>
+    </apex:panelGroup>
+    <apex:pageBlock title="My Open Opportunities">
+      <apex:facet name="header">
+        <apex:actionstatus id="status">
+          <apex:facet name="start"><apex:image value="{!URLFOR($Resource.bubbles,'progress/blue/progress.gif')}" style="padding-left:5px"/></apex:facet>
+          <apex:facet name="stop">
+            <apex:panelGroup >
+              <apex:panelGroup rendered="{!selectedSize == 0}">
+                <apex:image value="/img/s.gif" height="13" width="1"/><h2 class="mainTitle" style="font-size:95%;padding-left:2px;">My Open Opportunities</h2><span style="font-style:italic;padding-left:10px">Click on a bubble above or on a spefic name below to drill into the respective record</span>
+              </apex:panelGroup>
+              <apex:panelGroup rendered="{!selectedSize > 1}">
+                <apex:image value="/img/s.gif" height="13" width="1"/><h2 class="mainTitle" style="font-size:95%;padding-left:2px;">Multiple Opportunities Selected</h2><span style="font-style:italic;padding-left:10px">Click on a spefic name below to drill into the respective record or</span><span style="font-style:italic;padding-left:10px"><apex:commandLink value="back to list" action="{!clearSelected}" status="status" rerender="selectedBubbles"/></span>
+              </apex:panelGroup>
+              <apex:panelGroup rendered="{!selectedSize == 1}">
+                <apex:image value="/img/s.gif" height="13" width="1"/><h2 class="mainTitle" style="font-size:90%;padding-left:2px">Selected Opportunity: {!opportunity.name}</h2><span style="font-style:italic;padding-left:10px"><apex:commandLink value="back to list" action="{!clearSelected}" status="status" rerender="selectedBubbles"/></span>
+              </apex:panelGroup>
+            </apex:panelGroup>
+          </apex:facet>
+        </apex:actionStatus>
+      </apex:facet>
+      <apex:pageBlockTAble value="{!opportunities}" var="o" rendered="{!selectedSize <> 1}">
+        <apex:column headerValue="Opporunity Name">
+          <apex:commandLink value="{!o.name} ({!o.id})" action="{!setbubble}" status="status" rerender="thePlot,selectedBubbles">
+            <apex:param value="{!o.id}" assignTo="{!selectedId}"/>
+          </apex:commandLink>
+        </apex:column>
+        <apex:column headervalue="Account Name"><apex:outputField value="{!o.accountId}"/></apex:column>
+        <apex:column headerValue="Amount"><apex:outputField value="{!o.amount}"/></apex:column>
+        <apex:column headerValue="Stage"><apex:outputField value="{!o.stageName}"/></apex:column>
+        <apex:column headerValue="Probability"><apex:outputField value="{!o.probability}"/></apex:column>
+        <apex:column headerValue="Close Date"><apex:outputField value="{!o.closeDate}"/></apex:column>
+      </apex:pageBlockTAble>
+      <apex:pageBlockSection rendered="{!selectedSize == 1}">
+        <apex:outputField value="{!opportunity.name}"/>
+        <apex:outputField value="{!opportunity.account.name}"/>
+        <apex:outputField value="{!opportunity.probability}"/>
+        <apex:outputField value="{!opportunity.closeDate}"/>
+        <apex:outputField value="{!opportunity.amount}"/>
+        <apex:outputField value="{!opportunity.lastActivityDate}"/>
+      </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

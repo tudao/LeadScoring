@@ -1,0 +1,15 @@
+<apex:component id="c41" controller="cms.SmallBlock">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+	<div class="small-block">
+		<h1 class="small-block-title"><apex:outputText value="{!content.cms__Name__c}" /></h1>
+		<p class="small-block-text"><apex:outputLink value="{!IF(TargetPageLinkObj.targetPage != null, URLFOR(TargetPageLinkObj.targetPage), '')}" target="{!TargetPageLinkObj.target}" onclick="{!TargetPageLinkObj.javascript}" ><apex:outputText value="{!ContentSummary}" escape="false" /></apex:outputLink></p>
+	</div>
+
+</apex:component>

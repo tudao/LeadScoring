@@ -1,0 +1,9 @@
+<apex:page showHeader="false">
+	<apex:composition template="{!$Site.Template}">
+		<apex:define name="body"> 
+			<center>
+				<c:reCaptcha theme="white"/>
+			</center>
+		</apex:define>
+	</apex:composition>
+</apex:page>

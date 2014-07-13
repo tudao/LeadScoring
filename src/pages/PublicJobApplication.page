@@ -1,0 +1,43 @@
+<!-- This page uses the standard controller and extends it to overwrite the action buttons and file upload -->
+<apex:page standardController="Candidate__c"  extensions="PublicJobApplicationExtension" title="Job Application" showHeader="false" standardStylesheets="true">
+<!-- The site template provides the layout and the style for the site -->
+  <apex:form >
+    <apex:sectionHeader title="{!$ObjectType.Position__c.label}" subtitle="{!Position.name}"/>
+    <!-- Breadcrum link back to the job details page -->
+    <apex:commandLink value="<- Back to Job Details" onclick="top.history.go(-1);return false;" />
+    <!-- section to display the error mesages --> 
+    <apex:messages id="error" styleClass="errorMsg" layout="table" style="margin-top:1em;"/>
+      <apex:pageBlock title="Job Application Form" mode="edit">
+        <apex:pageBlockButtons >
+           <apex:commandButton value="Save" action="{!saveApplication}"/>
+           <apex:commandButton value="Cancel" onclick="top.history.go(-1);return false;"/>
+        </apex:pageBlockButtons>
+        <!-- Job information in read only -->
+        <apex:pageBlockSection title="Job Information" collapsible="false" columns="1">
+           <apex:outputField value="{!Position.name}"/>
+            <apex:outputField value="{!Position.Job_Description__c}" />
+        </apex:pageBlockSection>
+        <!-- Candidate information editable-->
+        <apex:pageBlockSection title="Candidate Information" collapsible="false" columns="1">
+           <apex:inputField value="{!Candidate__c.First_Name__c}"/>
+           <apex:inputField value="{!Candidate__c.Last_Name__c}"/>
+           <apex:inputField value="{!Candidate__c.Gender__c}"/>
+           <apex:inputField value="{!Candidate__c.Address__c}"/> 
+           <apex:inputField value="{!Candidate__c.City__c}"/>
+           <apex:inputField value="{!Candidate__c.State_Province__c}"/>
+           <apex:inputField value="{!Candidate__c.Postal_Code__c}"/>
+           <apex:inputField value="{!Candidate__c.Country__c}"/>
+           <apex:inputField value="{!Candidate__c.Email__c}"/>
+           <apex:inputField value="{!Candidate__c.Phone__c}"/>
+           <apex:inputField value="{!Candidate__c.Mobile__c}"/>
+           <apex:inputField value="{!Candidate__c.Education__c}"/>
+           <apex:inputField value="{!Candidate__c.Current_Employer__c}"/> 
+           <!-- Field to upload candidate resume -->
+           <apex:pageBlockSectionItem >
+           Upload your resume
+           <apex:inputFile accept="doc, txt, pdf" filename="{!fileName}" contentType="{!contentType}" filesize="1000" size="50" value="{!resume}"/>
+           </apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+     </apex:pageBlock>
+  </apex:form>
+</apex:page>

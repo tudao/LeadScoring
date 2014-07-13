@@ -1,0 +1,47 @@
+<apex:page showHeader="false" standardcontroller="Blog_Post__c" extensions="blogController">
+<apex:form >
+
+<!-- Skin CSS file -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.9.0/build/assets/skins/sam/skin.css"/>
+<!-- Utility Dependencies -->
+<script src="http://yui.yahooapis.com/2.9.0/build/yahoo-dom-event/yahoo-dom-event.js"></script> 
+<script src="http://yui.yahooapis.com/2.9.0/build/element/element-min.js"></script> 
+<!-- Needed for Menus, Buttons and Overlays used in the Toolbar -->
+<script src="http://yui.yahooapis.com/2.9.0/build/container/container_core-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/menu/menu-min.js"></script>
+<script src="http://yui.yahooapis.com/2.9.0/build/button/button-min.js"></script>
+<!-- Source file for Rich Text Editor-->
+<script src="http://yui.yahooapis.com/2.9.0/build/editor/editor-min.js"></script>
+<!-- Animation -->
+<script src="http://yui.yahooapis.com/2.9.0/build/animation/animation-min.js" type="text/javascript"></script>
+
+<div class="yui-skin-sam" style="display:none" id="editor" align="center" ><p />
+<h2>Blog Title: </h2>
+
+<apex:inputField value="{!Blog_Post__c.Name}"/>&nbsp;
+<apex:commandButton value="Save" action="{!savePost}"
+    onClick="beforeTextSave()"
+    oncomplete="window.parent.location.href='{!$Site.Prefix}/blog'"/>
+    <apex:commandButton value="Cancel" onclick="top.history.go(-1);return false;"/>
+<p />
+<apex:inputtextarea id="msgpost" cols="500" rows="50" value="{!Blog_Post__c.Post__c}"/>
+</div>
+
+<script type="text/javascript" >
+
+	var myEditor;
+	YAHOO.init = function() {
+	 myEditor = new YAHOO.widget.Editor('{!$component.msgpost}', {height: '400px', width: '722px', dompath: true, animate: true });
+	 myEditor.render();
+	 document.getElementById('editor').style.display='';
+	}
+	
+	function beforeTextSave() {
+	 document.getElementById('{!$component.msgpost}').value = myEditor.getEditorHTML();
+	}
+	
+	YAHOO.util.Event.addListener(window, "load", YAHOO.init);
+
+</script>
+
+</apex:form></apex:page>

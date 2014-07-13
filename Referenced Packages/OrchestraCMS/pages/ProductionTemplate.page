@@ -1,0 +1,65 @@
+<apex:page id="t" controller="cms.CoreController" sideBar="false" showHeader="false" standardStylesheets="false">
+
+<head>
+  <title>{!router.page_title}</title>
+  <meta name="description" content="{!router.page_description}"/>
+  <meta name="keywords" content="{!router.page_keywords}"/>
+
+  <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery.min.js')}" />
+  <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery-ui.custom.min.js')}" />  
+  <apex:includeScript value="{!URLFOR($Resource.cms__filters)}" /> 
+  <apex:includeScript value="{!$Resource.cms__DateTimeSelector}" />
+  <apex:includeScript value="{!$Resource.cms__PickList}" />
+  <apex:includeScript value="{!$Resource.cms__MultiPickList}" />
+  <apex:includeScript value="{!URLFOR($Resource.cms__OrchestraCMSPublic, '/RESTDynamicLoad.js')}" />
+
+  <apex:outputText escape="false">
+  	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.ocms-dynamicload').ocmsDynamicLoad({
+				sname : '{!router.site_name}'
+			}); 
+		}); 
+	</script>	  
+  </apex:outputText>
+
+  <apex:outputText escape="false" rendered="{!trigger_content_cashes}" >
+	<script type="text/javascript">
+  		
+  		if('{!cache_cli_ids_list}' != '') {
+			var data = {};
+		    data["action"] = "loadContentCache";
+		    data["sname"] = "{!router.site_name}";
+		    data["cli_ids"] = "{!cache_cli_ids_list}";
+		    data["token"] = "{!API.csrf_token}";
+		
+		    $.post("{!$Site.prefix}/OrchestraPublicAjax", data, function (json, status) {
+		    }, "json")
+  		}
+  		
+  		if('{!cache_pcli_ids_list}' != '') {
+			var data = {};
+		    data["action"] = "loadPageContentCache";
+		    data["sname"] = "{!router.site_name}";
+		    data["pcli_ids"] = "{!cache_pcli_ids_list}";
+		    data["token"] = "{!API.csrf_token}";
+		
+		    $.post("{!$Site.prefix}/OrchestraPublicAjax", data, function (json, status) {
+		    }, "json")  		
+  		}
+  		
+  											
+  	</script>
+  </apex:outputText>
+
+  <apex:insert name="header" />
+  
+</head>
+
+<body style="padding: 0px; margin: 0px;">
+	<apex:insert name="body" />
+</body>
+
+<site:previewAsAdmin />
+
+</apex:page>

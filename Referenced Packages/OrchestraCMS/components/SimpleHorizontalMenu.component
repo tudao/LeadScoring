@@ -1,0 +1,32 @@
+<apex:component controller="cms.SimpleHorizontalMenu" >
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+	
+	<apex:attribute name="page_content_layout_instance" type="cms__Page_Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!page_content_layout_instance}" />
+	<apex:attribute name="page_content_layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!page_content_layout_instance_properties}" />
+
+	<apex:attribute name="content_children" type="cms.ContentTreeNode" description="The panel unique identifier"  assignTo="{!children_nodes}" />
+	<apex:attribute name="content_children_attributes" type="cms.AttributeWrapper" description="The panel unique identifier" assignTo="{!children_nodes_attributes}" />
+
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!pm}" />
+	<apex:attribute name="preview_parameters" type="String" description="The page mode that the site is being rendered in" assignTo="{!pp}" />
+	<apex:attribute name="filter_by_profile" type="Boolean" description="The page mode that the site is being rendered in" assignTo="{!fbp}" />
+
+	<head>
+
+	</head>
+
+	<apex:repeat id="r" value="{!OrderedRootNodes}" var="node">
+			<apex:outputLink value="{!IF(node.targetPage != null, URLFOR(node.targetPage), '')}" styleClass="simple-horizontal-menu" onclick="{!node.javascript}" target="{!node.target}" style="font-size: {!LinkFontSize}">
+				<apex:outputText value="{!node.menu_item.cms__Name__c}" />
+			</apex:outputLink>
+			<apex:outputText styleClass="simple-horizontal-menu-divider" style="display: {!node.display};" value="{!'&nbsp;'+Divider+'&nbsp;'}" escape="false" />
+	</apex:repeat>
+
+</apex:component>

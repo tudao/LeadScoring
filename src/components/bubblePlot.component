@@ -1,0 +1,161 @@
+<apex:component controller="bubblePlotCon">
+  <apex:attribute name="sizedescription" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="ylabellowdescription" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="ylabelhighdescription" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="xlabellowdescription" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="xlabelhighdescription" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="width" description="The width of the plot area in pixels, i.e. '500'" type="Integer" assignTo="{!plotwidth}"/>
+  <apex:attribute name="height" description="The height of the plot area in pixels, i.e. '300'" type="Integer" assignTo="{!plotheight}"/>
+  <apex:attribute name="XlabelHigh" description="The label for the high value of the x-axis" type="String"/>
+  <apex:attribute name="XLabelLow" description="The label for the low value of the x-axis" type="String"/>
+  <apex:attribute name="YLabelHigh" description="The label for the high value of the y-axis" type="String"/>
+  <apex:attribute name="YLabelLow" description="The label for the low value of the y-axis" type="String"/>
+  <apex:attribute name="value" description="The collection of bubbles to be plotted" type="bubble[]" assignTo="{!componentBubbles}"/>
+  <apex:attribute name="status" description="" type="String"/>
+  <apex:attribute name="primaryColor" description="" type="String"/>
+	<apex:attribute name="secondarycolor" type="String"
+		description="TODO: Describe me" />
+	<apex:attribute name="colordescriptionblue" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="colordescriptiongray" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="colordescriptionred" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="colordescriptionyellow" type="String" description="TODO: Describe me"/>
+  <apex:attribute name="selectedId" assignTo="{!selectedId}" type="String" description=""/>
+  <apex:attribute name="rerender" description="The area(s) of the page that are to be refreshed upon the action invocation" type="String"/>
+ <apex:styleSheet value="{!URLFOR($Resource.bublestyles,'styles.css')}"/>
+
+ <div class="panelContainer">
+  <table align="center">
+  <tr><td> 
+  <table align="center">
+    <tr>
+      <td></td>
+      <td><span class="legendTextXAxis">{!XLabelLow}</span></td>
+      <td align="right"><span class="legendTextXAxis">{!XLabelHigh}</span></td>
+     </tr>
+    <tr>
+      <td align="right"><span class="legendTextYAxis">{!YlabelHigh}</span></td>
+      <td rowspan="2" colspan="2" style="height:{!height}px">
+        <apex:outputPanel id="bubblePanel" layout="block" styleClass="mainPanel" style="height:{!height}px;width:{!width}px;border-color:{!primaryColor}">
+          <apex:repeat value="{!componentBubbles}" var="b">
+            <apex:outputPanel style="cursor:pointer; position: absolute; left: {!b.normalizedXValue}px; bottom: {!b.normalizedYValue}px;">
+              <apex:actionSupport event="onclick" action="{!bubbleClick}" rerender="bubblePanel, {!rerender}" status="{!status}">
+                <apex:param name="x" value="{!b.normalizedXValue}" assignTo="{!selectedX}"/>
+                <apex:param name="y" value="{!b.normalizedYValue}" assignTo="{!selectedY}"/>
+              </apex:actionSupport>      
+            <apex:image value="{!URLFOR($Resource.bubbles, b.ImagePath)}" title="{!b.name}"/>
+            </apex:outputPanel>
+          </apex:repeat>
+        </apex:outputPanel></td>
+    </tr>
+    <tr>
+      <td style="vertical-align:bottom" align="right"><span  class="legendTextYAxis">{!YLabelLow}</span></td>
+
+    </tr>
+
+  </table>
+
+   </td>
+
+		<td style="vertical-align: middle"><apex:panelGrid columns="1"
+			styleClass="legendGrid" style="border-color:{!primaryColor}">
+
+			<apex:facet name="header">
+				<apex:outputPanel layout="block" styleClass="legendTitle"
+					style="background-color:{!secondaryColor}">Legend</apex:outputPanel>
+			</apex:facet>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="{!XLabelLow}: " styleClass="legendLabel" />
+				<apex:outputText value="{!xlabellowdescription}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="{!XLabelHigh}: " styleClass="legendLabel" />
+				<apex:outputText value="{!xlabelhighdescription}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="{!YLabelHigh}: " styleClass="legendLabel" />
+				<apex:outputText value="{!ylabelhighdescription}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="{!YLabelLow}: " styleClass="legendLabel" />
+				<apex:outputText value="{!ylabellowdescription}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="" styleClass="separator"/>
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="Size: " styleClass="legendLabel" />
+				<apex:outputText value="{!sizedescription}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel >
+
+				<apex:outputText value="" styleClass="separator" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!colordescriptionblue != ''}">
+
+				<apex:image value="{!URLFOR($Resource.bubbles,'blue/tiny.png')}"
+					style="padding-right:10px;vertical-align:middle" />
+				<apex:outputText value="{!colordescriptionblue}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!colordescriptiongray != ''}">
+
+				<apex:image value="{!URLFOR($Resource.bubbles,'gray/tiny.png')}"
+					style="padding-right:10px;vertical-align:middle" />
+				<apex:outputText value="{!colordescriptiongray}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!colordescriptionred != ''}">
+
+				<apex:image value="{!URLFOR($Resource.bubbles,'red/tiny.png')}"
+					style="padding-right:10px;vertical-align:middle" />
+				<apex:outputText value="{!colordescriptionred}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+			<apex:outputPanel rendered="{!colordescriptionyellow != ''}">
+
+				<apex:image value="{!URLFOR($Resource.bubbles,'yellow/tiny.png')}"
+					style="padding-right:10px;vertical-align:middle" />
+				<apex:outputText value="{!colordescriptionyellow}"
+					styleClass="legendValue" />
+
+			</apex:outputPanel>
+
+		</apex:panelGrid></td>
+		</tr>
+</table>
+
+</div>
+
+</apex:component>

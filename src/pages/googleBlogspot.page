@@ -1,0 +1,15 @@
+<apex:page controller="GBlogspotController">
+
+	<c:AuthSubComponent scope="http://spreadsheets.google.com/feeds/" />
+
+	<apex:pageBlock title="Extract Log" rendered="{!logLen>0}">
+		<apex:dataTable value="{!log}" var="msg" id="theTable"
+			rowClasses="odd,even" styleClass="tableClass">
+			<apex:column >
+				<apex:facet name="header">Message</apex:facet>
+				<apex:outputText value="{!msg}" />
+			</apex:column>
+		</apex:dataTable>
+	</apex:pageBlock>
+	
+</apex:page>

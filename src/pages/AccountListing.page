@@ -1,0 +1,26 @@
+<apex:page standardController="Account" recordSetVar="acclist"
+extensions="DynamicAccFields">
+<apex:form >
+<apex:pageBlock >
+<apex:outputLabel value="Select Accounts: " for="viewlist" />
+<apex:selectList id="viewlist" size="1" value="{!filterid}">
+<apex:actionsupport event="onchange" rerender="theTable"/>
+<apex:selectOptions value="{!listviewoptions}" />
+</apex:selectList>
+</apex:pageblock>
+<!-- This is reserved for displaying the fields later -->
+<apex:pageBlock title="Accounts" mode="edit">
+<apex:pageMessages />
+<apex:panelgroup id="theTable">
+<apex:pageblocktable value="{!acclist}" var="acc" >
+<apex:column value="{!acc.name}" />
+<apex:repeat value="{!displayFields}" var="field">
+<apex:column value="{!acc[field]}" />
+</apex:repeat>
+</apex:pageblocktable>
+</apex:panelgroup>
+</apex:pageBlock>
+<br/>
+<apex:commandButton value="Select Fields" action="{!Customize}" />
+</apex:form>
+</apex:page>

@@ -1,0 +1,26 @@
+<apex:page standardController="Account" recordsetvar="recs"
+extensions="DynamicAccFields" >
+<apex:messages /><br/>
+<apex:form >
+<apex:pageBlock title="Select Fields to Display" id="selectionBlock" >
+<apex:panelGrid columns="3">
+<apex:selectList id="unselected_list" required="false"
+value="{!selected}" multiselect="true" size="20" style="width:250px">
+<apex:selectOptions value="{!unSelectedOptions}" />
+</apex:selectList>
+<apex:panelGroup >
+<apex:commandButton value=">>" action="{!DoSelect}" rerender="selectionBlock"/>
+<br/>
+<apex:commandButton value="<<" action="{!DoUnselect}" rerender="selectionBlock" />
+</apex:panelGroup>
+<apex:selectList id="selected_list" required="false"
+value="{!unselected}" multiselect="true" size="20" style="width:250px">
+<apex:selectOptions value="{!selectedOptions}" />
+</apex:selectList>
+</apex:panelGrid>
+<em>Note: fields marked "*" aren't accessible by you</em>
+</apex:pageBlock>
+<br/>
+<apex:commandButton value="Show Selected" action="{!show}" />
+</apex:form>
+</apex:page>

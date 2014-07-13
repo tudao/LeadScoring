@@ -1,0 +1,69 @@
+<apex:component controller="cms.PortalRegisterController">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+    <br/>
+    <apex:outputText style="font-size: larger; font-weight: bold;" value="{!$Label.site.user_registration}"/>
+    <br/>
+    <apex:form id="theForm" forceSSL="true">
+    <script type="text/javascript">
+    	function createPortalUser(){
+    	    var data = {};
+    	    data['action']				= 'createPortalUser';
+    	    data['firstname'] 			= $(jq('{!$Component.firstname}')).attr('value');
+            data['lastname'] 			= $(jq('{!$Component.lastname}')).attr('value'); 
+            data['email'] 				= $(jq('{!$Component.email}')).attr('value'); 
+            data['communityNickname'] 	= $(jq('{!$Component.communityNickname}')).attr('value'); 
+            data['id']					= '{!DefaultAccount}';
+
+			$('.cp_errors').hide();
+			$('.cp-errors').empty();
+			$('.cp-controls').hide();
+			$('.cp-processing').show();
+            
+    	    $.post('{!actionUrl}', data, function(json, textStatus) {
+				if(json.status == 'error'){
+					for(i = 0; i < json.errors.length; i++){
+						$('.cp-errors').append('<div style="padding: 5px;">' + json.errors[i].msg + '</div>');
+					}
+					$('.cp-processing').hide();
+					$('.cp-errors').show();
+					$('.cp-controls').show();					
+				}else if(json.status == 'success'){
+					$(window).attr('location','{!IF(ConfirmationPageObj.targetPage != null, URLFOR(ConfirmationPageObj.targetPage), '')}');
+				}
+           	}, 'json'); 
+           	
+        }
+    </script>
+
+        <div class="cp-errors" style="display: none; color: #990000;">
+         
+         </div>
+         <div class="cp-controls">
+       <apex:panelGrid columns="2" style="margin-top:1em;">
+          <apex:outputLabel value="First Name" for="firstname"/>
+          <apex:inputText required="true" id="firstname" value="{!firstname}"/>
+          <apex:outputLabel value="Last Name" for="lastname"/>
+          <apex:inputText required="true" id="lastname" value="{!lastname}"/>
+          <apex:outputLabel value="{!$Label.site.community_nickname}" for="communityNickname"/>
+          <apex:inputText required="true" id="communityNickname" value="{!communityNickname}"/>
+          <apex:outputLabel value="{!$Label.site.email}" for="email"/>
+          <apex:inputText required="true" id="email" value="{!email}"/>
+          <apex:outputText value=""/>
+          <a href="#" onclick="createPortalUser(); return false;">{!$Label.site.submit}</a>
+        </apex:panelGrid> 
+        </div>
+        <div class="cp-processing" style="display: none;">
+			Processing...
+        </div>        
+        
+    </apex:form>                  
+    <br/>
+
+</apex:component>

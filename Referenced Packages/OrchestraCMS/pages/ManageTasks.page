@@ -1,0 +1,27 @@
+<apex:page controller="cms.BasicController"  showHeader="false" sidebar="false" standardStylesheets="false" cache="false" title="LibraryManager">
+<c:CmsStyles />
+<c:CmsScripts debug="true"/>
+<apex:includeScript value="{!$Resource.cms__TabInterface}" />
+<apex:includeScript value="{!URLFOR($Resource.cms__OrchestraCMSUI, 'TaskManager.js')}" />
+<apex:includeScript value="{!$Resource.cms__PageManagerDlgs}" />
+
+<script type="text/javascript">
+	$(document).data('sname', '{!JSENCODE(sname)}');
+	$(document).data('cms', {
+		"context" : "orchestracms",
+		"namespace" : "{!namespace}",
+	});
+	var pgMgr;
+    $(document).ready(function() {
+        taskMgr = $('#taskMgr').ocmsItemsToApprove({
+            
+        });
+       
+    });
+   
+</script>
+
+	<div id="taskMgr" style="height:100%"></div>
+
+
+</apex:page>

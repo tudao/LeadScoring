@@ -1,0 +1,32 @@
+<apex:component controller="cms.ContentLayoutController" extensions="cms.ListableWithImage2">
+
+  <apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+  <apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+  <apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+	
+	<apex:outputText escape="false" rendered="{!!ISNULL(ListImage)}">
+		<div class="panel-image">
+			<apex:image value="{!ListImage}" style="border: 2px solid #FFFFFF;" />
+		</div>
+	</apex:outputText>
+	<div class="panel-content">
+	
+		<apex:outputText escape="false" rendered="{!!ISBLANK(ListTitle)}">
+			<h3><apex:outputText value="{!ListTitle}" /></h3>
+		</apex:outputText>
+		
+		<apex:outputText escape="false" rendered="{!showDate}">
+			<strong class="date">
+				<apex:outputText value="{!FormatedDate}" />
+			</strong>
+		</apex:outputText>
+		
+		<apex:outputLink value="{!IF(TargetLinkObj.targetPage != null, URLFOR(TargetLinkObj.targetPage), '')}" target="{!TargetLinkObj.target}" onclick="{!TargetLinkObj.javascript}"><apex:outputText value="{!ListSummary}" /></apex:outputLink>
+			
+		<apex:outputText escape="false" rendered="{!!ISBLANK(MoreLink)}">
+			<apex:outputLink value="{!IF(TargetLinkObj.targetPage != null, URLFOR(TargetLinkObj.targetPage), '')}" target="{!TargetLinkObj.target}" onclick="{!TargetLinkObj.javascript}" styleClass="more-link" ><apex:outputText value="{!morelink}" /></apex:outputLink>
+		</apex:outputText>
+		
+	</div>
+
+</apex:component>

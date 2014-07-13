@@ -1,0 +1,28 @@
+<apex:component controller="cms.SearchBasicFormController">
+
+    <apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+    <apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+    <apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+    <apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+    <apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+    <apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+    <apex:attribute name="page_mode" type="String" description="The mode the component is being rendered in" assignTo="{!pm}" />
+
+    <form id="searchForm" method="POST" action="{!ResultsPageLink.targetPage}" >
+      <apex:outputPanel layout="block">
+        <div>
+          <div style="float: left;">
+            <input class="ocms-search-input" name="oSearch" id="oSearch" type="text" value="" />
+          </div>
+          <div style="float: left; padding-left: 10px;">
+            <button class="ocms-search-btn">Search</button>
+          </div>            
+          <div style="clear: both;"></div>
+        </div>
+        
+      </apex:outputPanel>
+    </form>
+
+</apex:component>

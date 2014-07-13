@@ -1,0 +1,44 @@
+<apex:component controller="cms.PortalLoginController">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+    <apex:form id="loginForm" forceSSL="true">
+      <apex:outputPanel layout="block">
+
+        <apex:pageMessages id="error"/>
+
+        <apex:panelGrid columns="2" style="margin-top:1em;">
+
+			<apex:outputLabel value="{!$Label.site.username}" for="username"/>
+	        <apex:inputText id="username" value="{!Username}"/>
+
+	        <apex:outputLabel value="{!$Label.site.password}" for="password"/>
+	        <apex:inputSecret id="password" value="{!Password}"/>
+
+	        <apex:outputText value=""/>
+
+	        <apex:commandButton action="{!login}" value="{!$Label.site.login_button}" id="loginButton"/>       
+
+	        <apex:outputText value=""/>
+
+    	    <apex:outputText value=""/>
+
+        	<apex:outputText value=""/>
+
+	        <apex:panelGroup id="theLinks">
+	          <apex:outputLink value="{!IF(ForgotPasswordPageObj.targetPage != null, URLFOR(ForgotPasswordPageObj.targetPage), '')}"> {!$Label.site.forgot_your_password_q}</apex:outputLink>
+	          <apex:outputText value=" | " rendered="{!$Site.RegistrationEnabled}" />
+	          <apex:outputLink value="{!IF(SelfRegistrationPageObj.targetPage != null, URLFOR(SelfRegistrationPageObj.targetPage), '')}" rendered="{!$Site.RegistrationEnabled}">{!$Label.site.new_user_q}</apex:outputLink>
+	        </apex:panelGroup>
+
+	    </apex:panelGrid> 
+
+    </apex:outputPanel>
+  </apex:form>
+
+</apex:component>

@@ -1,0 +1,5 @@
+<apex:page >
+	{:Start:}
+		The record list goes here		
+	{:Stop:}
+</apex:page>

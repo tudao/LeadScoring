@@ -1,0 +1,47 @@
+<apex:page id="thePage" sidebar="false" showHeader="false">
+	<apex:includeScript value="{!URLFOR($Resource.scriptaculous, 'scriptaculous-js-1.9.0/lib/prototype.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.scriptaculous, 'scriptaculous-js-1.9.0/src/scriptaculous.js')}" />
+	
+	<script type="text/javascript">
+		// Take all the elements whatever you want to make Draggable. 
+		// Include only the elements you need, order doesn't matter!
+		   var elements = [
+		   'thePage:theForm:image1',
+		   'thePage:theForm:image2',
+		   'thePage:theForm:outputText2',
+		   'thePage:theForm:outputText1',
+		   'thePage:theForm:outputText3',
+		   'thePage:theForm:outputText4'
+		   
+		   ];
+		// Make all the items dragable by creating Draggable objects
+		window.onload = function() {
+		   elements.each(
+		       function(item) {
+		           new Draggable(item, {});
+		       }
+		   );
+		}
+	</script>
+	<apex:sectionHeader title="Simple Example of Salesforce 'Drag and Drop'" subTitle="Example 1"/>
+	<center>
+		<apex:form id="theForm">
+			<apex:outputPanel > <!-- No need for outputPanel to include an id -->
+				<apex:image id="image1" url="http://tomsblog-developer-edition.ap1.force.com/img/force_logo_win10.gif"/>
+				<br/>
+				<apex:outputText id="outputText1" value="force.com " />
+				<apex:outputText id="outputText2" value="Can be such a drag!" />
+				<hr/><br/><br/><br/>
+				<apex:image id="image2" url="http://www.google.com/intl/en_ALL/images/logo.gif"/>
+				<br/>
+				<apex:outputText id="outputText3" value="Yuck, I've seen enough, " />
+				<apex:outputText id="outputText4" value="get me outta here..." />
+				<br/>
+			</apex:outputPanel>
+		</apex:form>
+		<form method="get" action="http://www.google.com/search">
+			<input type="text" name="q" size="31" maxlength="255" value="" />
+			<input type="submit" value="Search" />
+		</form>
+	</center>
+</apex:page>

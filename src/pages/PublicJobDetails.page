@@ -1,0 +1,23 @@
+<apex:page standardController="Position__c" title="Job Details" showHeader="false" standardStylesheets="true">
+<!-- The site template provides the layout and the style for the site -->
+  <apex:form >
+  <apex:sectionHeader title="{!$ObjectType.Position__c.label}" subtitle="{!Position__c.name}"/>
+    <!-- Breadcrum link back to the search page -->
+    <apex:commandLink value="<- Back to Search" onclick="window.location='{!$Site.Prefix}/PublicJobs';return false;" />
+      <apex:pageBlock title="Job Detail">
+        <apex:pageBlockButtons >
+          <!-- Apply button linked to the job application page -->
+          <apex:commandButton value="Apply" onclick="window.location='{!$Site.Prefix}/PublicJobApplication?jobid={!Position__c.Id}';return false;" />
+        </apex:pageBlockButtons>
+        <!-- Job details -->
+        <apex:pageBlockSection title="Information" collapsible="false" columns="1">
+          <apex:outputField value="{!Position__c.name}"/>
+          <apex:outputField value="{!Position__c.Department__c}"/>       
+          <apex:outputField value="{!Position__c.Job_Description__c}" />
+          <apex:outputField value="{!Position__c.Responsibilities__c}" />
+          <apex:outputField value="{!Position__c.Educational_Requirements__c}" />
+          <apex:outputField value="{!Position__c.Programming_Languages__c}"/>
+        </apex:pageBlockSection>
+     </apex:pageBlock>
+  </apex:form>
+</apex:page>

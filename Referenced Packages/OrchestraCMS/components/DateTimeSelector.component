@@ -1,0 +1,33 @@
+<apex:component id="dt" controller="cms.DateTimeController">
+
+  <apex:attribute name="cName" type="String" description="Passthrough Id" assignTo="{!identity}" />
+  <apex:attribute name="cDisable" type="Boolean" description="Passthrough Id" assignTo="{!isDisabled}" />  
+  <apex:attribute name="cPassthroughId" type="String" description="Passthrough Id" assignTo="{!cPassthrough}" />
+  <apex:attribute name="cDateTime" type="String" description="The panel unique identifier" assignTo="{!originalTimelineText}" />
+  <apex:attribute name="onChange" type="String" description="Javascript to execute" required="false" assignTo="{!onChange}" />
+  <apex:attribute name="cType" type="String" description="The type of datetime selector to use" required="false" assignTo="{!cType}" />
+  <apex:attribute name="cShowDateLabel" type="Boolean" description="Whether or not to show the date label" required="false" default="true" />
+  
+  <apex:includeScript value="{!$Resource.cms__DateTimeSelector}" />
+ 
+  <script type="text/javascript">
+
+	$(document).ready(function(){
+
+		$(jq('{!identity}_selector')).datetime_selector({
+			passThruId: jq('{!cPassthroughId}'),
+			type: {!IF(cType == null, '"datetime"', '"'+cType+'"')},
+			date: '{!viewDate}',
+			time: '{!viewTime}',
+			ampm: '{!viewAmPM}',
+			disabled: '{!isDisabled}',
+			showlabel: {!cShowDateLabel}
+		});
+
+	}); 
+		
+  </script>
+
+  <div class="{!identity}" id="{!identity}_selector" ></div>
+
+</apex:component>

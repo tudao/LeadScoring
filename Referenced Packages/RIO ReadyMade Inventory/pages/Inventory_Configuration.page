@@ -1,0 +1,22 @@
+<apex:page standardController="readymade_inv__Configuration__c" extensions="readymade_inv.ReadyMadeInventoryConfigurationExtension">
+    <apex:form >
+        <div align="left" style="background-image: url({!$Resource.rio_readymade_inventory_background});background-repeat: repeat-x;" >
+            <a href="http://www.wdcigroup.net" target="_blank">
+                <apex:image id="theImage" value="{!$Resource.readymade_inv__rio_readymade_inventory_wdci_logo}" style="align:left"/>
+            </a>
+        </div>
+        <br/>
+        <apex:pageBlock title="RIO ReadyMade Inventory Configuration">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!saveConfig}" value="Save" />
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageMessages rendered="true"/>
+            <apex:pageBlockSection columns="1" >
+                <apex:inputField value="{!WorkingConfig.readymade_inv__Enable_Apps__c}"/>
+                <apex:inputField value="{!WorkingConfig.readymade_inv__Qualify_Opportunity_Stage__c}"/>
+                <apex:inputField value="{!WorkingConfig.readymade_inv__Quantity_Threshold__c}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

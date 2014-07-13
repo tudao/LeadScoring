@@ -1,0 +1,13 @@
+/*
+ LinkSelectorDialog.js - JQuery LinkSelector dialog.
+
+ Copyright (c) 2010 - Stantive Technologies Group (http://www.stantive.com)
+ All Rights Reserved.
+ NOTE: THIS FILE IS GENERATED, PLEASE MODIFY THE FILE LOCATED IN "other-src/web/ocmsJS/" DIRECTORY.
+*/
+$(document).data("cms_LinkSelectorDialog-LOADED",true);
+(function($){$.widget("ui.link_selector_dialog",{_create:function(){var self=this;var o=self.options;self.selectedType=null;self.selected=null;self.selectedName=null;if(o.allowPages||o.allowExternal)self.bFullMode=true;else self.bFullMode=false;if(self.bFullMode){self.root=$("<div></div>");$("body").append(self.root)}else self.root=$(self.element[0]);self.root.link_selector({sname:o.siteName,ajaxLoaderImage:o.ajaxLoaderImage,tooltipImage:o.tooltipImage,onMediaItemSelected:function(item){if(!self.bFullMode)if($.isFunction(o.onOk)){$.logInfo("onOk {0}",
+item.url);o.onOk(item.url)}},zIndex:12010});if(self.bFullMode){self._SelectorDlg=self.root.dialog({bgiframe:true,autoOpen:false,height:400,width:800,modal:true,zIndex:12E3,open:function(){self.root.link_selector("resize")},resize:function(){self.root.link_selector("resize")}});self._SelectorDlg.dialog("addButton","cancel".localize(),function(event){$(this).dialog("close")});self._SelectorDlg.dialog("addButton","select".localize(),function(event){if($(this).link_selector("validateSelection")){self.selectedType=
+$(this).link_selector("getSelectedType");var selected=$(this).link_selector("getSelected");if(self.selectedType=="Internal"){self.selected=selected.id;self.selectedName=selected.name}else if(self.selectedType=="Media"){self.selected=selected.id;self.selectedName=selected.pageName}else if(self.selectedType=="External")self.selected=selected.url;if($.isFunction(o.onOk))o.onOk(self.getUrl());$(this).dialog("close")}})}},open:function(){var self=this;var url=$(document).data("targetField");$.logInfo("TARGET: {0}",
+url);self.root.link_selector("setSelected",url);if(self.bFullMode)self._SelectorDlg.dialog("open");else self.root.link_selector("openBrowser")},getUrl:function(){var self=this;var url="";if(self.selectedType=="Internal")if(self.options.namespace!=""&&self.options.namespace!="null"&&self.options.namespace!=null)url=url+"/"+self.options.namespace+"__Main?name="+self.selectedName;else url=url+"/Main?name="+self.selectedName;else url=url+self.selected;return url},options:{version:"1.0",isPublished:false,
+ajaxLoaderImage:null,allowMedia:true,allowPages:true,allowExternal:true,namespace:"",siteName:"",sitePrefix:"",title:"Dialog",tooltipImage:null,onOk:null}})})(jQuery);

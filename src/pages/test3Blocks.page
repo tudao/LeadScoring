@@ -1,0 +1,17 @@
+<apex:page standardcontroller="Account">
+  <style>
+   .labelCol{width:10% !important;}
+   .dataCol{width:20% !important;}
+    </style>
+<apex:pageBlock >
+    <apex:pageBlockSection showHeader="true" title="Account Info" columns="3" id="allowances">
+        <apex:outputField value="{!Account.Name}"/>
+        <apex:outputField value="{!Account.Site}"/>
+        <apex:outputField value="{!Account.Phone}"/>
+        
+        <apex:outputField value="{!Account.Industry}"/>
+        <apex:outputField value="{!Account.Rating}"/>
+        <apex:outputField value="{!Account.Website}"/>
+</apex:pageBlockSection>
+</apex:pageBlock>
+</apex:page>

@@ -1,0 +1,33 @@
+<apex:component controller="cms.HorizontalImageBar" allowDml="true">
+
+	<apex:attribute name="content" type="cms__Content__c" description="The panel unique identifier" assignTo="{!content}" />
+	<apex:attribute name="properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_properties}" />
+	<apex:attribute name="contentController" type="cms.CoreController" description="The executing page controller" assignTo="{!layout_controller}" />
+
+	<apex:attribute name="layout_instance" type="cms__Content_Layout_Instance__c" description="The panel unique identifier" assignTo="{!content_layout_instance}" />
+	<apex:attribute name="layout_instance_properties" type="cms__Attribute__c[]" description="The panel unique identifier" assignTo="{!content_layout_instance_properties}" />
+
+	<apex:attribute name="site_name" type="String" description="The name of the site the component is being rendered in" assignTo="{!sn}" />
+	<apex:attribute name="page_mode" type="String" description="The page mode that the site is being rendered in" assignTo="{!pm}" />
+
+	<apex:outputText escape="false" rendered="{!ShowOther}">
+		<apex:repeat id="r1" value="{!ImageLinks}" var="image">
+			<div class="horizontal-image-bar-image" style="float: {!float};">
+				<apex:outputLink value="{!IF(image.linkObj.targetPage != null, URLFOR(image.linkObj.targetPage), '#')}" onclick="{!image.linkObj.javascript}" target="{!image.linkObj.target}"><apex:image alt="{!image.AltText}" title="{!image.TitleText}" value="{!image.ImageId}" /></apex:outputLink>
+			</div>
+		</apex:repeat>
+	</apex:outputText>
+
+	<apex:outputText escape="false" rendered="{!ShowCenter}">
+		<table style="margin: 0 auto 0 auto;">
+		  <tr>
+		    <td style="text-align: center; vertical-align: middle;">
+				<apex:repeat value="{!ImageLinks}" var="image">
+					<div class="horizontal-image-bar-image" style="display: inline;"><apex:outputLink value="{!IF(image.linkObj.targetPage != null, URLFOR(image.linkObj.targetPage), '#')}" onclick="{!image.linkObj.javascript}" target="{!image.linkObj.target}"><apex:image alt="{!image.AltText}" title="{!image.TitleText}" value="{!image.ImageId}" /></apex:outputLink></div>
+				</apex:repeat>
+			</td>
+		  </tr>
+		</table>
+	</apex:outputText>
+
+</apex:component>

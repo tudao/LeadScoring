@@ -1,0 +1,309 @@
+<apex:page >
+<style>
+body {
+    background: none repeat scroll 0 0 #A8A604;
+    color: #FFFFFF;
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 13px;
+    margin-top: 20px;
+    padding: 0;
+}
+h1, h2, h3 {
+    color: #649632;
+    font-family: Georgia,"Times New Roman",Times,serif;
+    font-weight: normal;
+    margin: 0;
+}
+h1 {
+    font-size: 44px;
+}
+h2 {
+    font-size: 26px;
+}
+h3 {
+}
+p, ul, ol {
+    font-family: "Trebuchet MS",Arial,Helvetica,sans-serif;
+    font-size: 11px;
+    line-height: 240%;
+    margin-top: 0;
+    text-align: justify;
+}
+ul, ol {
+}
+blockquote {
+}
+a {
+    color: #000000;
+}
+a:hover {
+    text-decoration: none;
+}
+a img {
+    border: medium none;
+}
+img.left {
+    float: left;
+    margin: 7px 30px 0 0;
+}
+img.right {
+    float: right;
+    margin: 7px 0 0 30px;
+}
+hr {
+    display: none;
+}
+.list1 {
+}
+.list1 li {
+    float: left;
+    line-height: normal;
+}
+.list1 li img {
+    margin: 0 30px 30px 0;
+}
+.list1 li.alt img {
+    margin-right: 0;
+}
+#wrapper {
+}
+#header-wrapper {
+    margin: 0 auto;
+    width: 900px;
+}
+#header {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img02.jpg')}) no-repeat scroll left top transparent;
+    height: 70px;
+    margin: 0 auto;
+    width: 900px;
+}
+#menu {
+    float: left;
+    height: 50px;
+    width: 540px;
+}
+#menu ul {
+    line-height: normal;
+    list-style: none outside none;
+    margin: 0;
+    padding: 13px 0 0 10px;
+}
+#menu li {
+    display: block;
+    float: left;
+}
+#menu a {
+    color: #FFFFFF;
+    display: block;
+    float: left;
+    font: 14px Georgia,"Times New Roman",Times,serif;
+    margin-right: 17px;
+    padding: 5px 12px;
+    text-decoration: none;
+}
+#menu a:hover {
+    text-decoration: underline;
+}
+#menu .current_page_item a {
+    color: #FFFFFF;
+}
+#search {
+    float: right;
+    height: 76px;
+    width: 305px;
+}
+#search form {
+    float: right;
+    margin: 0;
+    padding: 15px 20px 0 0;
+}
+#search fieldset {
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+#search input {
+    border: medium none;
+    float: left;
+    font: 12px Georgia,"Times New Roman",Times,serif;
+}
+#search-text {
+    background: none repeat scroll 0 0 #ECF9E4;
+    color: #658453;
+    height: 18px;
+    padding: 3px 0 0 5px;
+    width: 135px;
+}
+#search-submit {
+    color: #39561D;
+    height: 21px;
+    margin-left: 12px;
+}
+#page {
+    margin: 0 auto;
+    width: 900px;
+}
+#logo {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img01.jpg')}) no-repeat scroll left top transparent;
+    height: 260px;
+}
+#logo h1, #logo p {
+    float: left;
+    line-height: normal;
+    margin: 0;
+    padding: 0 0 0 20px;
+}
+#logo h1 {
+    padding-top: 140px;
+}
+#logo h1 a {
+    color: #FFFFFF;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+#logo h1 a:hover {
+    text-decoration: underline;
+}
+#logo p {
+    color: #B6ACA2;
+    font: italic 13px Georgia,"Times New Roman",Times,serif;
+    padding: 165px 0 0 15px;
+}
+#logo p a {
+    color: #B6ACA2;
+    text-decoration: none;
+}
+#logo p a:hover {
+    text-decoration: underline;
+}
+#content {
+    float: left;
+    width: 620px;
+}
+.post {
+    margin-bottom: 25px;
+}
+.post .title {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img05.jpg')}) no-repeat scroll left top transparent;
+    color: #FFFFFF;
+    height: 55px;
+    margin-bottom: 3px;
+    padding: 19px 0 2px 20px;
+}
+.post .date {
+    color: #B6ACA2;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    margin-top: -60px;
+    padding-right: 40px;
+}
+.post .meta {
+    color: #B6ACA2;
+    font-family: Arial,Helvetica,sans-serif;
+    font-size: 10px;
+    font-weight: normal;
+    margin: -40px 0 3px 25px;
+    padding: 2px 30px 2px 0;
+}
+.post .meta a {
+    color: #B6ACA2;
+}
+.post .entry {
+    padding: 25px 20px;
+}
+.post .links {
+    margin: 0 250px 0 0;
+    padding: 0 0 0 0;
+}
+.post .links .comments {
+}
+.post .links .permalink {
+    padding-left: 17px;
+}
+#sidebar {
+    float: right;
+    width: 250px;
+}
+#sidebar ul {
+    line-height: normal;
+    list-style: none outside none;
+    margin: 0;
+    padding: 0;
+}
+#sidebar li {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img04.jpg')}) no-repeat scroll left bottom transparent;
+    margin-bottom: 30px;
+    padding: 0 0 20px 0;
+}
+#sidebar li ul {
+    line-height: 200%;
+    padding-bottom: 20px;
+}
+#sidebar li li {
+    background: none repeat scroll 0 0 transparent;
+    margin: 0;
+    padding: 0 20px;
+}
+#sidebar h2 {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img03.jpg')}) no-repeat scroll left top transparent;
+    color: #FFFFFF;
+    font-size: 18px;
+    height: 33px;
+    margin: 0 0 20px 0;
+    padding: 15px 0 2px 20px;
+}
+#sidebar p {
+    line-height: 200%;
+    padding: 0 15px;
+}
+#sidebar a {
+    color: #FFFFFF;
+}
+#calendar {
+}
+#calendar caption {
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+#calendar table {
+    border-collapse: collapse;
+    width: 90%;
+}
+#calendar thead th {
+    padding: 5px 0;
+    text-align: center;
+}
+#calendar tbody td {
+    padding: 5px 0;
+    text-align: center;
+}
+#calendar tfoot td {
+    padding: 5px;
+}
+#calendar tfoot #next {
+    text-align: right;
+}
+#calendar #today {
+    background: none repeat scroll 0 0 #000000;
+}
+#footer {
+    background: url({!URLFOR($Resource.SFUNEARTHEDCSS,'images/img06.jpg')}) no-repeat scroll left top transparent;
+    height: 60px;
+    margin: 0 auto;
+    padding: 0;
+    width: 900px;
+}
+#footer p {
+    color: #B5ADA5;
+    line-height: normal;
+    margin: 0;
+    padding: 20px 0;
+    text-align: center;
+}
+#footer a {
+    color: #B5ADA5;
+}
+
+</style>
+</apex:page>

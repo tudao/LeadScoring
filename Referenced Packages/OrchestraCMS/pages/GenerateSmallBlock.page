@@ -1,0 +1,10 @@
+<apex:page controller="cms.GenerateContent" standardStylesheets="false" showHeader="false" sidebar="false" id="g">
+	<html>
+	<head></head>
+	<body>
+	{:Start:}
+	<c:SmallBlock content="{!content}" properties="{!properties}"  />	
+	{:Stop:}
+	</body>
+	</html>
+</apex:page>

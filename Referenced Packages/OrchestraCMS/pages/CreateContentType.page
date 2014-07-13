@@ -1,0 +1,165 @@
+<apex:page controller="cms.CreateContentTypeController" sidebar="false" showHeader="false" standardStylesheets="false" cache="false">
+<html>
+<head>
+
+  <apex:stylesheet value="{!URLFOR($Resource.cms__jqueryui, '/css/jquery.ui.all.css')}" />
+
+  <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery.min.js')}" />
+  <!-- This is the jquery cookie extension only -->
+  <apex:includeScript value="{!$Resource.cms__jquery}" />
+  <apex:includeScript value="{!URLFOR($Resource.cms__jqueryui, '/js/jquery-ui.custom.min.js')}" />  
+  
+  <c:CmsStyles />
+  <c:CmsScripts />
+
+  <style type="text/css">
+  
+ .sortable { background-color: rgb(195,195,195);}
+ .draggable { height: 25px; padding: 3px; font-size: 12px; font-family: arial; background-color: rgb(235,235,235); border: 1px solid rgb(200,200,200); width: 250px;}
+ .sortable div { height: 25px; }
+ 
+  </style>
+
+  <script type="text/javascript">
+	$(document).ready(function() {
+		$(jq('{!$Component.f.typeName}')).change(function() {
+			$(jq('{!$Component.f.typeLabel}')).val($(this).val());
+			return true; 
+		});
+		
+		$('.btnSave').button();
+		$('.btnSave').click(function(){
+			save();
+		});
+
+		$('.btnSaveAndNew').button();
+		$('.btnSaveAndNew').click(function(){
+			saveAndNew();
+		});
+		
+		$('.btnCancel').button();
+		$('.btnCancel').click(function(){
+			cancel();
+		});		
+		
+	});
+   </script>
+  
+</head>
+
+<body style="padding: 0px; margin: 0px;">
+   
+  <apex:outputPanel id="create" rendered="{!showCreate}">
+  
+    <c:SetupMenu sname="{!sname}" activeitem="manage-content-type" />
+    
+    <div style="margin-left: 210px; padding: 10px;">   
+	
+		  <div class="ocms-setup-breadcrumb">
+			 <div class="ocms-setup-breadcrumb-start"></div>
+			 <div class="ocms-setup-breadcrumb-item">Setup</div>
+			 <div class="ocms-setup-breadcrumb-separator"></div>		  
+			 <div class="ocms-setup-breadcrumb-item">Content Types</div>
+			 <div class="ocms-setup-breadcrumb-separator-active"></div>		  
+			 <div class="ocms-setup-breadcrumb-item-active">{!modeText} Content Type</div>
+			 <div class="ocms-setup-breadcrumb-end"></div>
+			 <div class="ocms-setup-clear"></div>
+		  </div>
+		  <br />
+    
+	    <apex:form id="f">
+	
+		<apex:actionFunction action="{!save}" name="save" />
+		<apex:actionFunction action="{!saveAndNew}" name="saveAndNew" />
+		<apex:actionFunction action="{!cancel}" name="cancel" />	
+	
+	    <apex:outputPanel layout="block" style="background-color: rgb(255,255,255); font-family: Arial; font-size: 12px;"> 
+		
+		    <div style="font-size: 16px; padding-bottom: 8px;">{!modeText} Content Type</div>
+		
+			<apex:outputPanel id="mgs" rendered="{!showMessages}">
+			<table border="0" cellspacing="0" cellpadding="5px;">
+			<apex:repeat value="{!messages}" var="m">
+		   		 <tr>
+		      		<td style="width: 300px; color: #990000;">{!m}</td>
+		    	  </tr>
+			</apex:repeat>
+			</table>
+			</apex:outputPanel>
+		  
+		    <apex:outputPanel id="saved" rendered="{!showSaved}">
+		
+			    <table border="0" cellspacing="0" cellpadding="5px;">
+		   		 <tr>
+		      		<td style="width: 300px;"><br />Content Type <strong>{!saved.Name__c}</strong> Saved.<br />&nbsp;</td>
+		    	  </tr>
+		    	</table>
+		    
+		    </apex:outputPanel>
+		  
+		    <table border="0" cellspacing="0" cellpadding="5px;">
+		    <tr>
+		    	<td></td>
+		    	<td></td>
+		    	<td>
+					<div class="btnSave" style="float:left; padding-right: 5px;">Save</div>
+					<apex:outputText rendered="{!showSaveAndNew}">
+						<div class="btnSaveAndNew" style="float: left; padding-right: 5px;">Save &amp; New</div>
+					</apex:outputText>
+					<div class="btnCancel" style="float:left;">Cancel</div>
+					<div style="clear: both;">&nbsp;</div>
+		    	</td>
+		    </tr> 		    
+		    <tr>
+		      <td style="width: 120px;">Name *</td>
+		      <td style="width: 15px;">&nbsp;</td>
+		      <td style="width: 175px;"><apex:inputText id="typeName" value="{!ctype.cms__Name__c}"  size="40"/></td>
+		    </tr>
+		    <tr>
+		      <td>Label</td>
+		      <td>&nbsp;</td>
+		      <td><apex:inputText id="typeLabel" value="{!ctype.cms__Label__c}" size="40" /></td>
+		    </tr>
+		    <tr>
+		      <td valign="top">Enabled Content Templates:</td>
+		      <td>&nbsp;</td>
+		      <td>
+				<table border="0" cellspacing="0" cellpadding="5" class="ocms-list" >
+					<tr class="list-header">
+						<td style="width: 25px;">Select</td>
+						<td class="last" style="width: 250px;">Template Name</td>
+					</tr>
+					<apex:repeat value="{!allTemplates}" var="template">
+						<tr class="list-row">
+							<td><apex:inputCheckbox value="{!template.selected}" /></td>
+							<td class="last"><apex:outputText value="{!template.name}" /></td>
+                         </tr>
+					</apex:repeat>
+					<tr class="list-footer">
+						<td class="last" colspan="2">&nbsp;</td> 
+					</tr>
+				</table>
+		      </td>
+		    </tr>
+		    <tr>
+		    	<td colspan="3">
+					<div class="btnSave" style="float:left; padding-right: 5px;">Save</div>
+					<apex:outputText rendered="{!showSaveAndNew}">
+						<div class="btnSaveAndNew" style="float: left; padding-right: 5px;">Save &amp; New</div>
+					</apex:outputText>
+					<div class="btnCancel" style="float:left;">Cancel</div>
+					<div style="clear: both;"></div>
+		    	</td>
+		    </tr>   
+		   </table>
+		   	
+	    </apex:outputPanel>
+	
+	    </apex:form>
+
+    </div>
+
+  </apex:outputPanel>  
+</body>
+</html>
+</apex:page>
