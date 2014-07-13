@@ -11,6 +11,7 @@
         <externalId>false</externalId>
         <inlineHelpText>Do you want Accounts located and displayed on a map?</inlineHelpText>
         <label>Accounts</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -31,6 +32,7 @@ Values should only be:(1-9)  Recommend 7.
         <precision>2</precision>
         <required>true</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -41,6 +43,7 @@ Values should only be:(1-9)  Recommend 7.
         <externalId>false</externalId>
         <inlineHelpText>Do you want Contacts located and displayed on a map?</inlineHelpText>
         <label>Contacts</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -50,6 +53,7 @@ Values should only be:(1-9)  Recommend 7.
         <label>GKey</label>
         <length>100</length>
         <required>true</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -63,6 +67,7 @@ Values should only be:(1-9)  Recommend 7.
         <precision>18</precision>
         <required>true</required>
         <scale>0</scale>
+        <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
@@ -73,6 +78,7 @@ Values should only be:(1-9)  Recommend 7.
         <externalId>false</externalId>
         <inlineHelpText>Do you want Leads to be located and displayed on the maps?</inlineHelpText>
         <label>Leads</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <label>FindNearbySettings</label>

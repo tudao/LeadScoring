@@ -11,6 +11,7 @@
         <label>Action</label>
         <length>255</length>
         <required>false</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -20,6 +21,7 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Active</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -29,6 +31,7 @@
         <label>License</label>
         <length>255</length>
         <required>false</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>
@@ -38,6 +41,7 @@
         <deprecated>false</deprecated>
         <externalId>false</externalId>
         <label>Locked</label>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -47,6 +51,7 @@
         <label>Type</label>
         <length>255</length>
         <required>false</required>
+        <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
     </fields>

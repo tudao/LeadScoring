@@ -9,6 +9,7 @@
         <inlineHelpText>Select this if its ok to proceed with an order when there is not enough stock on hand.</inlineHelpText>
         <label>Allow Backorders</label>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
     <fields>
@@ -20,6 +21,7 @@
         <required>false</required>
         <scale>0</scale>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
         <type>Percent</type>
     </fields>
     <fields>
@@ -29,6 +31,7 @@
         <externalId>false</externalId>
         <label>Lock</label>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
         <type>Checkbox</type>
     </fields>
 </CustomObject>

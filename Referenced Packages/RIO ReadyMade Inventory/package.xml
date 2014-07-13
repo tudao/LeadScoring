@@ -69,5 +69,5 @@
         <members>Product2.StockThresholdIsBlank</members>
         <name>ValidationRule</name>
     </types>
-    <version>28.0</version>
+    <version>30.0</version>
 </Package>

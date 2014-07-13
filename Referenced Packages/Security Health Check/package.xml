@@ -158,5 +158,5 @@
         <members>shc_css</members>
         <name>StaticResource</name>
     </types>
-    <version>28.0</version>
+    <version>30.0</version>
 </Package>
